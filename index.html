@@ -44,12 +44,11 @@
             transition: 0.2s;
         }
         button:hover { background-color: #ff007f; }
-        #secret-content { display: none; margin-top: 20px; }
-        #third-page { display: none; margin-top: 20px; }
+        #secret-content, #third-page, #fourth-page { display: none; margin-top: 20px; }
         .error { color: #ff4d6d; font-weight: bold; margin-top: 10px; }
         img { max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px; }
 
-        /* ❤️ PULSING HEART BUTTON STYLES */
+        /* ❤️ PULSING HEART BUTTON */
         .heart-btn {
             background: none;
             border: none;
@@ -79,7 +78,6 @@
             max-width: 85%;
             box-shadow: inset 0 0 20px rgba(212, 163, 115, 0.2), 0 8px 16px rgba(0,0,0,0.06);
         }
-        /* Top and Bottom stylized scroll handles */
         .scroll-container::before, .scroll-container::after {
             content: '';
             position: absolute;
@@ -99,12 +97,74 @@
             line-height: 1.8;
             color: #4a3b32;
             text-align: left;
-            white-space: pre-wrap; /* Keeps line breaks exactly as written */
+            white-space: pre-wrap;
             min-height: 150px;
+        }
+
+        /* 🖼️ GALLERY PHOTO FRAMES STYLES */
+        .gallery-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            align-items: center;
+            margin-top: 30px;
+        }
+
+        .frame-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* 1. Oval Frame */
+        .oval-frame img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 50% / 40% 40% 60% 60%; /* Hand-drawn oval feel */
+            border: 8px solid #fb6f92;
+            box-shadow: 0 8px 20px rgba(251, 111, 146, 0.2);
+        }
+
+        /* 2. Heart Frame */
+        .heart-frame img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            clip-path: path("M12 4.419C12.443 4.004 18.006-.511 22 2.82c4.105 3.442 1.764 10.12-10 18.18-11.764-8.06-14.105-14.738-10-18.18 3.994-3.33 9.557 1.185 10 1.599z");
+            /* Scales the SVG path to match the 250px box */
+            transform: scale(10); 
+            transform-origin: top left;
+        }
+        /* Heart Fallback for simplified coding */
+        .heart-clip {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            /* Romantic heart masking */
+            clip-path: url(#heart-mask);
+        }
+
+        /* 3. Cute Cartoon Square Frame */
+        .square-frame img {
+            width: 230px;
+            height: 230px;
+            object-fit: cover;
+            border: 10px solid #ffb3c6;
+            border-radius: 15px; /* Softer cartoon edges */
+            transform: rotate(-2deg); /* Cute playful tilt */
+            box-shadow: 5px 5px 0px #fb6f92; /* 3D pop shadow */
         }
     </style>
 </head>
 <body>
+
+    <svg width="0" height="0">
+        <defs>
+            <clipPath id="heart-mask" clipPathUnits="objectBoundingBox">
+                <path d="M 0.5, 0.24 C 0.5, 0.24, 0.43, 0.05, 0.25, 0.05 C 0.07, 0.05, 0, 0.23, 0, 0.43 C 0, 0.68, 0.25, 0.86, 0.5, 1 C 0.75, 0.86, 1, 0.68, 1, 0.43 C 1, 0.23, 0.93, 0.05, 0.75, 0.05 C 0.57, 0.05, 0.5, 0.24, 0.5, 0.24" />
+            </clipPath>
+        </defs>
+    </svg>
 
     <div class="container">
         <div id="login-screen">
@@ -138,13 +198,38 @@
                 <div id="typewriter-letter" class="letter-text"></div>
             </div>
 
+            <button id="gallery-next-btn" onclick="goToFourthPage()" style="display: none; background-color: #ff007f; margin-bottom: 20px;">Open Our Gallery 📸</button>
             <br>
-            <button onclick="goBackToSecondPage()" style="margin-top: 10px; background-color: #6c757d;">Go Back</button>
+            <button onclick="goBackToSecondPage()" style="background-color: #6c757d;">Go Back</button>
+        </div>
+
+        <div id="fourth-page">
+            <h1>Our Sweetest Memories 📸</h1>
+            <p>A little space built for some of my absolute favorite moments with you.</p>
+
+            <div class="gallery-container">
+                <div class="frame-wrapper oval-frame">
+                    <img src="pic1.jpeg" alt="Our memory in oval frame">
+                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">Always Laughing With You ✨</p>
+                </div>
+
+                <div class="frame-wrapper">
+                    <img src="pic2.jpeg" class="heart-clip" alt="Our memory in heart frame">
+                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">My Whole Heart ❤️</p>
+                </div>
+
+                <div class="frame-wrapper square-frame">
+                    <img src="pic3.jpeg" alt="Our memory in tilted square frame">
+                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">Counting Down The Days ✈️</p>
+                </div>
+            </div>
+
+            <br>
+            <button onclick="goBackToThirdPage()" style="margin-top: 40px; background-color: #6c757d;">Back to Letter</button>
         </div>
     </div>
 
     <script>
-        // The letter contents broken up with clean spacing
         const fullLetter = `Hi, my Sammy, I hope you like this lil surprise I made for you. First, I wanted to start off by saying I'm so glad we're able to make it to 8 MONTHSS while still being so in love with each other. Although we've had many miscommunications throughout our relationship, we continued to choose each other every day, and I'm so proud of us for that.\n\nMy beautiful baby, thank you for being such a big part of my life, and I couldn't ask for a better partner than you. You never fail to make me smile, and I always find joy when I'm talking to you. Thank you for making me feel loved and appreciated for everything I do for you, no matter how small it is. Every day I find myself falling deeper in love with the same girl I fell for 8 months ago, and I realise how lucky I am to be able to care for her for the rest of my life.\n\nI'm so freaking proud of how far we've come, and I can't wait for the rest of our days together. I know we're gonna have many more miscommunications in the future, but they're all gonna be worth it when I end up putting that ring on your finger :)\n\nTo many, many, many, many, many more monthsaries and anniversaries.\n\n~ Your Hubby`;
 
         let letterIndex = 0;
@@ -166,7 +251,6 @@
             document.getElementById("secret-content").style.display = "none";
             document.getElementById("third-page").style.display = "block";
             
-            // Starts typing the letter out only when she lands on page 3
             if (!isTypingStarted) {
                 isTypingStarted = true;
                 typeLetter();
@@ -177,9 +261,22 @@
             if (letterIndex < fullLetter.length) {
                 document.getElementById("typewriter-letter").textContent += fullLetter.charAt(letterIndex);
                 letterIndex++;
-                // ⏱️ Speed: 20 milliseconds per letter makes it flow out quickly but dynamically!
-                setTimeout(typeLetter, 20); 
+                // ⏱️ SPEED UP: Changed from 20ms to 8ms for faster typing out!
+                setTimeout(typeLetter, 8); 
+            } else {
+                // Show the "Open Our Gallery" button immediately once the letter finishes typing
+                document.getElementById("gallery-next-btn").style.display = "inline-block";
             }
+        }
+
+        function goToFourthPage() {
+            document.getElementById("third-page").style.display = "none";
+            document.getElementById("fourth-page").style.display = "block";
+        }
+
+        function goBackToThirdPage() {
+            document.getElementById("fourth-page").style.display = "none";
+            document.getElementById("third-page").style.display = "block";
         }
 
         function goBackToSecondPage() {
