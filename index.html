@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Favorite Person ❤️</title>
+    <style>
+        body {
+            background-color: #ffe5ec; /* Cute pastel pink background */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 50px 20px;
+            color: #fb6f92;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
+        }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        p { font-size: 1.1rem; line-height: 1.6; color: #6c757d; }
+        input {
+            padding: 12px;
+            font-size: 16px;
+            border: 2px solid #ffb3c6;
+            border-radius: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            outline: none;
+            text-align: center;
+        }
+        button {
+            padding: 12px 25px;
+            font-size: 16px;
+            background-color: #fb6f92;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        button:hover { background-color: #ff007f; }
+        #secret-content { display: none; margin-top: 20px; }
+        .error { color: #ff4d6d; font-weight: bold; margin-top: 10px; }
+        img { max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="login-screen">
+            <h1>🔒 Restricted Access</h1>
+            <p>This website is private. To unlock it, please enter our secret password.</p>
+            <p style="font-size: 0.9rem; font-style: italic;">Hint: The date of our first official anniversary (Format: MMDDYY)</p>
+            
+            <input type="text" id="password-input" placeholder="Type password here...">
+            <br>
+            <button onclick="checkPassword()">Unlock ❤️</button>
+            <div id="error-message" class="error"></div>
+        </div>
+
+        <div id="secret-content">
+            <h1>Happy Monthsary, Beautiful! 🎉</h1>
+            <p>You correctly guessed the password! Every single day with you is a blessing, no matter how many miles are between us. Thank you for being the best girlfriend ever.</p>
+            
+            <img src="us.jpg" alt="A cute picture of us">
+        </div>
+    </div>
+
+    <script>
+        function checkPassword() {
+            const userInput = document.getElementById("password-input").value;
+            
+            // 🚨 CHANGE THIS WORD: This is the actual password she needs to type!
+            const correctPassword = "161225"; 
+
+            if (userInput.trim() === correctPassword) {
+                document.getElementById("login-screen").style.display = "none";
+                document.getElementById("secret-content").style.display = "block";
+            } else {
+                document.getElementById("error-message").innerText = "Wrong password! Try again, babe. 😘";
+            }
+        }
+    </script>
+
+</body>
+</html>
