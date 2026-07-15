@@ -3,230 +3,475 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For My Favorite Person ❤️</title>
+    <title>Our Picnic Spot ❤️</title>
     <style>
+        * { box-sizing: border-box; }
         body {
-            background-color: #ffe5ec; /* Cute pastel pink background */
+            background-color: #ffe5ec; /* Pastel Pink background */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 50px 20px;
+            padding: 20px;
             color: #fb6f92;
+            margin: 0;
+            overflow-x: hidden;
         }
+        
+        /* Landscape Optimized Base Container */
         .container {
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 1200px;
+            min-height: 85vh;
+            margin: 20px auto;
             background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0px 10px 25px rgba(0,0,0,0.05);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0px 12px 30px rgba(0,0,0,0.04);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; }
-        p { font-size: 1.1rem; line-height: 1.6; color: #6c757d; }
+
+        h1 { font-size: 2.8rem; margin-top: 0; margin-bottom: 15px; font-weight: 800; text-shadow: 1px 1px 0px #fff; }
+        p { font-size: 1.15rem; line-height: 1.6; color: #6c757d; max-width: 800px; }
+        
         input {
-            padding: 12px;
+            padding: 14px;
             font-size: 16px;
             border: 2px solid #ffb3c6;
-            border-radius: 10px;
-            width: 80%;
-            margin-bottom: 15px;
+            border-radius: 12px;
+            width: 320px;
+            margin-bottom: 20px;
             outline: none;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
         }
+        
         button {
-            padding: 12px 25px;
+            padding: 14px 30px;
             font-size: 16px;
             background-color: #fb6f92;
             color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(251, 111, 146, 0.2);
         }
-        button:hover { background-color: #ff007f; }
-        #secret-content, #third-page, #fourth-page { display: none; margin-top: 20px; }
-        .error { color: #ff4d6d; font-weight: bold; margin-top: 10px; }
-        img { max-width: 100%; height: auto; border-radius: 15px; margin-top: 20px; }
+        button:hover { background-color: #ff007f; transform: translateY(-2px); }
+        
+        .back-btn {
+            background-color: #6c757d;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .back-btn:hover { background-color: #495057; }
 
-        /* ❤️ PULSING HEART BUTTON */
-        .heart-btn {
-            background: none;
-            border: none;
-            font-size: 60px;
-            cursor: pointer;
-            padding: 0;
-            display: inline-block;
-            margin-top: 20px;
-            animation: pulse 1.2s infinite ease-in-out;
-            outline: none;
+        /* Hide sections initially */
+        #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final {
+            display: none;
+            width: 100%;
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
+        .error { color: #ff4d6d; font-weight: bold; margin-bottom: 15px; }
 
-        /* 📜 CARTOON SCROLL STYLES */
-        .scroll-container {
-            background-color: #fffdf6; /* Vintage paper color */
-            border: 4px solid #d4a373; /* Wooden scroll border color */
-            border-radius: 10px;
-            padding: 30px;
-            margin: 30px auto;
+        /* 🧺 MAIN SCENE 3: PICNIC PARK BACKGROUND & SCATTERED ITEMS */
+        .picnic-scene {
+            width: 100%;
+            height: 520px;
+            background: linear-gradient(to bottom, #cce3de 60%, #a3b18a 60%); /* Sky/Hills to Grass */
+            border-radius: 20px;
             position: relative;
-            max-width: 85%;
-            box-shadow: inset 0 0 20px rgba(212, 163, 115, 0.2), 0 8px 16px rgba(0,0,0,0.06);
+            overflow: hidden;
+            border: 6px solid #e9ecef;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.05);
         }
-        .scroll-container::before, .scroll-container::after {
+
+        /* The Picnic Blanket */
+        .picnic-mat {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 75%;
+            height: 180px;
+            background-color: #fff;
+            background-image: radial-gradient(#ffccd5 20%, transparent 20%),
+                              radial-gradient(#ffccd5 20%, transparent 20%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            border-radius: 30px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+        }
+
+        /* Central Basket Container */
+        .basket-center {
+            position: absolute;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 90px;
+            cursor: default;
+            filter: drop-shadow(0 8px 5px rgba(0,0,0,0.15));
+            user-select: none;
+        }
+
+        /* Floating Interactive Clickables */
+        .picnic-item {
+            position: absolute;
+            font-size: 55px;
+            cursor: pointer;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            filter: drop-shadow(0 6px 4px rgba(0,0,0,0.1));
+            user-select: none;
+        }
+        .picnic-item:hover {
+            transform: scale(1.25) rotate(5deg);
+        }
+        
+        /* Scattered item positions around the basket */
+        #item-cassette { bottom: 120px; left: 24%; }
+        #item-tulips   { bottom: 50px;  left: 32%; }
+        #item-envelope { bottom: 50px;  right: 32%; }
+        #item-camera   { bottom: 120px; right: 24%; }
+
+        /* 3.1 📻 CASSETTE PLAYER STAGE */
+        .cassette-layout {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+            gap: 20px;
+        }
+        .left-player { width: 25%; display: flex; justify-content: center; }
+        .center-video { width: 50%; display: flex; justify-content: center; }
+        .right-booth { width: 25%; display: flex; flex-direction: column; gap: 15px; align-items: center; }
+        
+        .booth-img { width: 170px; height: 220px; object-fit: cover; border: 8px solid white; box-shadow: 0 6px 15px rgba(0,0,0,0.1); border-radius: 4px; }
+        
+        .record-player {
+            width: 150px;
+            height: 150px;
+            background: #333;
+            border-radius: 50%;
+            border: 8px solid #c29363;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+            animation: spin 3s linear infinite;
+        }
+        .record-player::after {
             content: '';
             position: absolute;
-            left: -10px;
-            right: -10px;
-            height: 12px;
-            background: #c29363;
-            border-radius: 6px;
-            border: 2px solid #a37547;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px; height: 40px;
+            background: #fb6f92;
+            border-radius: 50%;
+            border: 4px solid white;
         }
-        .scroll-container::before { top: -8px; }
-        .scroll-container::after { bottom: -8px; }
+        @keyframes spin { 100% { transform: rotate(300deg); } }
 
-        .letter-text {
+        /* 3.2 🌷 TULIPS LOCKET STAGE */
+        .locket-zone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 25px;
+            position: relative;
+            width: 100%;
+        }
+        .locket-interactive {
+            font-size: 80px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.1));
+        }
+        .locket-photos {
+            display: none;
+            gap: 25px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+        .locket-img {
+            width: 180px; height: 240px;
+            object-fit: cover;
+            border: 6px solid #f8f9fa;
+            border-radius: 50% 50% 40% 40% / 40% 40% 50% 50%; /* Oval/Locket shape */
+            filter: grayscale(100%);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .hearts-circle {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 900px;
+            margin-top: 15px;
+        }
+        .bubble-heart {
+            background: #fff0f3;
+            border: 2px solid #ffccd5;
+            padding: 12px 18px;
+            border-radius: 20px;
+            font-weight: 600;
+            color: #ff4d6d;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.03);
+        }
+
+        /* 3.3 ✉️ PINK ENVELOPE STAGE */
+        .scroll-container-wide {
+            background-color: #fffdf6;
+            border: 4px solid #d4a373;
+            border-radius: 12px;
+            padding: 35px;
+            margin: 20px auto;
+            width: 95%;
+            box-shadow: inset 0 0 25px rgba(212, 163, 115, 0.15), 0 6px 15px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        .scroll-container-wide::before, .scroll-container-wide::after {
+            content: ''; position: absolute; left: -8px; right: -8px; height: 14px; background: #c29363; border-radius: 6px;
+        }
+        .scroll-container-wide::before { top: -8px; }
+        .scroll-container-wide::after { bottom: -8px; }
+
+        .letter-text-wide {
             font-family: 'Georgia', serif;
             font-size: 1.15rem;
             line-height: 1.8;
             color: #4a3b32;
             text-align: left;
             white-space: pre-wrap;
-            min-height: 150px;
         }
-
-        /* 🖼️ GALLERY PHOTO FRAMES STYLES */
-        .gallery-container {
+        .letter-booth-row {
             display: flex;
-            flex-direction: column;
-            gap: 40px;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 35px;
+        }
+        .letter-booth-img {
+            width: 180px; height: 230px; object-fit: cover; border: 8px solid white; border-radius: 4px; box-shadow: 0 6px 12px rgba(0,0,0,0.08);
+        }
+
+        /* 3.4 📷 CAMERA PHOTO BOARD GALLERY */
+        .photo-board {
+            width: 100%;
+            background: #f4ebd9; /* Craft paper board look */
+            border: 8px solid #d4a373;
+            border-radius: 16px;
+            padding: 30px;
+            display: flex;
+            justify-content: space-around;
             align-items: center;
-            margin-top: 30px;
+            flex-wrap: nowrap; /* Forces landscape alignment */
+            gap: 15px;
+            margin-top: 25px;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.05);
+        }
+        .board-card {
+            background: white;
+            padding: 10px 10px 25px 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: 0.2s;
+        }
+        .board-card img { width: 135px; height: 160px; object-fit: cover; display: block; }
+        
+        /* Geometric styling variations & distinct tilts */
+        .c-oval img   { border-radius: 50%; }
+        .c-heart img  { clip-path: url(#heart-mask-gallery); }
+        .c-square img { border-radius: 8px; }
+        
+        .tilt-l { transform: rotate(-5deg); }
+        .tilt-r { transform: rotate(6deg); }
+        .tilt-s { transform: rotate(-2deg); }
+        .tilt-m { transform: rotate(4deg); }
+
+        /* SVG Heart definition for gallery items */
+        #gallery-svg-clip { width: 0; height: 0; position: absolute; }
+
+        /* 🌟 COMPLETION SNOOPY MODAL TRIGGER */
+        .snoopy-unlock-panel {
+            margin-top: 25px;
+            background: #fff0f3;
+            border: 3px dashed #ffb3c6;
+            padding: 20px;
+            border-radius: 16px;
+            display: none;
+            animation: pulse 1.5s infinite ease-in-out;
         }
 
-        .frame-wrapper {
+        /* 🐾 FINAL PAGE STYLING */
+        .bubble-frame {
+            background: #f8f9fa;
+            border: 3px solid #333;
+            border-radius: 30px;
+            padding: 30px;
             position: relative;
-            display: inline-block;
+            max-width: 700px;
+            margin: 0 auto 35px auto;
+            box-shadow: 6px 6px 0px #333;
         }
-
-        /* 1. Oval Frame */
-        .oval-frame img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            border-radius: 50% / 40% 40% 60% 60%; /* Hand-drawn oval feel */
-            border: 8px solid #fb6f92;
-            box-shadow: 0 8px 20px rgba(251, 111, 146, 0.2);
+        .bubble-frame::after {
+            content: ''; position: absolute; bottom: -20px; left: 80px;
+            border-width: 20px 20px 0; border-style: solid; border-color: #f8f9fa transparent;
+            display: block; width: 0;
         }
-
-        /* 2. Heart Frame */
-        .heart-frame img {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            clip-path: path("M12 4.419C12.443 4.004 18.006-.511 22 2.82c4.105 3.442 1.764 10.12-10 18.18-11.764-8.06-14.105-14.738-10-18.18 3.994-3.33 9.557 1.185 10 1.599z");
-            /* Scales the SVG path to match the 250px box */
-            transform: scale(10); 
-            transform-origin: top left;
+        .bubble-frame::before {
+            content: ''; position: absolute; bottom: -24px; left: 78px;
+            border-width: 22px 22px 0; border-style: solid; border-color: #333 transparent;
+            display: block; width: 0; z-index: -1;
         }
-        /* Heart Fallback for simplified coding */
-        .heart-clip {
-            width: 250px;
-            height: 250px;
-            object-fit: cover;
-            /* Romantic heart masking */
-            clip-path: url(#heart-mask);
-        }
-
-        /* 3. Cute Cartoon Square Frame */
-        .square-frame img {
-            width: 230px;
-            height: 230px;
-            object-fit: cover;
-            border: 10px solid #ffb3c6;
-            border-radius: 15px; /* Softer cartoon edges */
-            transform: rotate(-2deg); /* Cute playful tilt */
-            box-shadow: 5px 5px 0px #fb6f92; /* 3D pop shadow */
-        }
+        .bubble-frame p { font-size: 1.4rem; font-weight: bold; color: #333; margin: 0; }
+        .final-img { max-width: 450px; border: 10px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.12); border-radius: 8px; }
     </style>
 </head>
 <body>
 
-    <svg width="0" height="0">
+    <svg id="gallery-svg-clip">
         <defs>
-            <clipPath id="heart-mask" clipPathUnits="objectBoundingBox">
+            <clipPath id="heart-mask-gallery" clipPathUnits="objectBoundingBox">
                 <path d="M 0.5, 0.24 C 0.5, 0.24, 0.43, 0.05, 0.25, 0.05 C 0.07, 0.05, 0, 0.23, 0, 0.43 C 0, 0.68, 0.25, 0.86, 0.5, 1 C 0.75, 0.86, 1, 0.68, 1, 0.43 C 1, 0.23, 0.93, 0.05, 0.75, 0.05 C 0.57, 0.05, 0.5, 0.24, 0.5, 0.24" />
             </clipPath>
         </defs>
     </svg>
 
     <div class="container">
+        
         <div id="login-screen">
             <h1>🔒 Restricted Access</h1>
-            <p>HI BEAUTIFUL to unlock this amazing present, please enter our secret password.</p>
+            <p>Hi my lovee, to unlock this amazing present, please enter our secret password.</p>
             <p style="font-size: 0.9rem; font-style: italic;">Hint: The date of our first official anniversary (Format: MMDDYY)</p>
             
             <input type="text" id="password-input" placeholder="Type password here...">
             <br>
             <button onclick="checkPassword()">Unlock ❤️</button>
             <div id="error-message" class="error"></div>
-            <img src="front.jpg" alt="Cover photo" style="margin-top: 30px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 80%;">
+            <img src="front.jpg" alt="Cover photo" style="margin-top: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); max-width: 400px;">
         </div>
 
         <div id="secret-content">
             <h1>Happy Monthsary, Beautiful! 🎉</h1>
             <p>You got the password &lt;3 ! Every single day with you is a blessing, no matter how many miles are between us. Thank you for being the best girlfriend ever.</p>
             
-            <img src="us.jpg.jpeg" alt="A cute picture of us">
+            <img src="us.jpg" alt="A cute picture of us" style="max-width: 420px; margin-bottom: 20px;">
             
             <div>
-                <button onclick="goToThirdPage()" class="heart-btn">❤️</button>
-                <p style="font-size: 0.9rem; color: #fb6f92; font-weight: bold; margin-top: 5px;">Click the heart for one more surprise...</p>
+                <button onclick="goToPicnicHub()" class="heart-btn">❤️</button>
+                <p style="font-size: 0.95rem; color: #fb6f92; font-weight: bold; margin-top: 5px;">Click the heart to join our picnic spot...</p>
             </div>
         </div>
 
-        <div id="third-page">
-            <h1>A Letter For You 📜</h1>
+        <div id="main-picnic">
+            <h1>Our Romantic Picnic Spot 🧺</h1>
+            <p style="margin-bottom: 25px;">Look around the mat! Tap the items inside and around the basket to discover hidden surprises.</p>
             
-            <div class="scroll-container">
-                <div id="typewriter-letter" class="letter-text"></div>
+            <div class="picnic-scene">
+                <div class="picnic-mat"></div>
+                
+                <div class="basket-center">🧺</div>
+                
+                <div id="item-cassette" class="picnic-item" onclick="openActivity('cassette')">📻</div>
+                <div id="item-tulips" class="picnic-item" onclick="openActivity('tulips')">🌷</div>
+                <div id="item-envelope" class="picnic-item" onclick="openActivity('envelope')">✉️</div>
+                <div id="item-camera" class="picnic-item" onclick="openActivity('camera')">📷</div>
             </div>
 
-            <button id="gallery-next-btn" onclick="goToFourthPage()" style="display: none; background-color: #ff007f; margin-bottom: 20px;">Open Our Gallery 📸</button>
-            <br>
-            <button onclick="goBackToSecondPage()" style="background-color: #6c757d;">Go Back</button>
+            <div id="snoopy-box" class="snoopy-unlock-panel">
+                <h3 style="margin: 0 0 10px 0; color: #ff4d6d;">🐾 Surprise Unlocked!</h3>
+                <button onclick="goToFinalPage()" style="background-color: #ff007f; font-size: 1.1rem;">Yay, you completed all of them! Click me! 🐶</button>
+            </div>
         </div>
 
-        <div id="fourth-page">
-            <h1>Our Sweetest Memories 📸</h1>
-            <p>A little space built for some of my absolute favorite moments with you.</p>
+        <div id="page-cassette">
+            <h1>The Track That Reminds Me Of You 🎵</h1>
+            <p>Sit back, hit play, and look over these memories while our song plays.</p>
+            
+            <div class="cassette-layout">
+                <div class="left-player">
+                    <div class="record-player"></div>
+                </div>
+                <div class="center-video">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/pyGU-UudvrM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.1);"></iframe>
+                </div>
+                <div class="right-booth">
+                    <img src="cassette1.jpg" class="booth-img" alt="Memory 1">
+                    <img src="cassette2.jpg" class="booth-img" alt="Memory 2">
+                </div>
+            </div>
+            <br>
+            <button onclick="returnToHub('cassette')" class="back-btn">Return to Picnic 🧺</button>
+        </div>
 
-            <div class="gallery-container">
-                <div class="frame-wrapper oval-frame">
-                    <img src="pic1.jpeg" alt="Our memory in oval frame">
-                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">Always Laughing With You ✨</p>
+        <div id="page-tulips">
+            <h1>Things I Love About You 🌷</h1>
+            <p>Click the closed locket below to reveal our special pictures inside.</p>
+            
+            <div class="locket-zone">
+                <div id="locket-icon" class="locket-interactive" onclick="revealLocket()">🔒💝</div>
+                
+                <div id="locket-display-box" class="locket-photos">
+                    <img src="locket1.jpg" class="locket-img" alt="Locket left inside">
+                    <img src="locket2.jpg" class="locket-img" alt="Locket right inside">
                 </div>
 
-                <div class="frame-wrapper">
-                    <img src="pic2.jpeg" class="heart-clip" alt="Our memory in heart frame">
-                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">My Whole Heart ❤️</p>
+                <div class="hearts-circle">
+                    <div class="bubble-heart">💖 Your smile that lights up the whole room</div>
+                    <div class="bubble-heart">💖 Your voice that is so sweet</div>
+                    <div class="bubble-heart">💖 Your beautiful face that absolutely no one can compare to</div>
+                    <div class="bubble-heart">💖 Your deep love and care for me</div>
+                    <div class="bubble-heart">💖 Your heart that always has compassion for everyone</div>
+                    <div class="bubble-heart">💖 Your personality that I will never get bored off</div>
                 </div>
+            </div>
+            <br>
+            <button onclick="returnToHub('tulips')" class="back-btn">Return to Picnic 🧺</button>
+        </div>
 
-                <div class="frame-wrapper square-frame">
-                    <img src="pic3.jpeg" alt="Our memory in tilted square frame">
-                    <p style="color: #fb6f92; font-weight: bold; margin-top: 5px;">Counting Down The Days ✈️</p>
-                </div>
+        <div id="page-envelope">
+            <h1>My Heartfelt Message 📜</h1>
+            
+            <div class="scroll-container-wide">
+                <div id="typewriter-letter" class="letter-text-wide"></div>
+            </div>
+
+            <div class="letter-booth-row">
+                <img src="letter1.jpg" class="letter-booth-img" alt="Letter Strip 1">
+                <img src="letter2.jpg" class="letter-booth-img" alt="Letter Strip 2">
+                <img src="letter3.jpg" class="letter-booth-img" alt="Letter Strip 3">
             </div>
 
             <br>
-            <button onclick="goBackToThirdPage()" style="margin-top: 40px; background-color: #6c757d;">Back to Letter</button>
+            <button onclick="returnToHub('envelope')" class="back-btn" style="margin-top: 40px;">Return to Picnic 🧺</button>
         </div>
+
+        <div id="page-camera">
+            <h1>Our Memory Board 🖼️</h1>
+            <p>Every single frame tells part of our beautiful 8-month story.</p>
+            
+            <div class="photo-board">
+                <div class="board-card c-oval tilt-l"><img src="gallery1.jpg" alt="G1"></div>
+                <div class="board-card c-heart tilt-r"><img src="gallery2.jpg" alt="G2"></div>
+                <div class="board-card c-square tilt-s"><img src="gallery3.jpg" alt="G3"></div>
+                <div class="board-card c-oval tilt-m"><img src="gallery4.jpg" alt="G4"></div>
+                <div class="board-card c-heart tilt-l"><img src="gallery5.jpg" alt="G5"></div>
+                <div class="board-card c-square tilt-r"><img src="gallery6.jpg" alt="G6"></div>
+            </div>
+            
+            <br>
+            <button onclick="returnToHub('camera')" class="back-btn" style="margin-top: 40px;">Return to Picnic 🧺</button>
+        </div>
+
+        <div id="page-final">
+            <div class="bubble-frame">
+                <p>I hoped you like this present I made for you my love, to us having many many more years together until we grow old :)</p>
+            </div>
+            <img src="final.jpg" class="final-img" alt="Final Memory Surprise">
+        </div>
+
     </div>
 
     <script>
@@ -234,6 +479,9 @@
 
         let letterIndex = 0;
         let isTypingStarted = false;
+
+        // Tracks unique activity views
+        const trackingList = { cassette: false, tulips: false, envelope: false, camera: false };
 
         function checkPassword() {
             const userInput = document.getElementById("password-input").value;
@@ -247,41 +495,66 @@
             }
         }
 
-        function goToThirdPage() {
+        function goToPicnicHub() {
             document.getElementById("secret-content").style.display = "none";
-            document.getElementById("third-page").style.display = "block";
+            document.getElementById("main-picnic").style.display = "block";
+        }
+
+        function openActivity(type) {
+            document.getElementById("main-picnic").style.display = "none";
             
-            if (!isTypingStarted) {
-                isTypingStarted = true;
-                typeLetter();
+            if (type === 'cassette') document.getElementById("page-cassette").style.display = "block";
+            if (type === 'tulips') document.getElementById("page-tulips").style.display = "block";
+            if (type === 'camera') document.getElementById("page-camera").style.display = "block";
+            
+            if (type === 'envelope') {
+                document.getElementById("page-envelope").style.display = "block";
+                if (!isTypingStarted) {
+                    isTypingStarted = true;
+                    typeLetter();
+                }
             }
+            
+            // Log interaction path tracking
+            trackingList[type] = true;
         }
 
         function typeLetter() {
             if (letterIndex < fullLetter.length) {
                 document.getElementById("typewriter-letter").textContent += fullLetter.charAt(letterIndex);
                 letterIndex++;
-                // ⏱️ SPEED UP: Changed from 20ms to 8ms for faster typing out!
-                setTimeout(typeLetter, 8); 
-            } else {
-                // Show the "Open Our Gallery" button immediately once the letter finishes typing
-                document.getElementById("gallery-next-btn").style.display = "inline-block";
+                setTimeout(typeLetter, 8); // Rapid typing performance engine
             }
         }
 
-        function goToFourthPage() {
-            document.getElementById("third-page").style.display = "none";
-            document.getElementById("fourth-page").style.display = "block";
+        function revealLocket() {
+            document.getElementById("locket-icon").innerText = "🔓💝";
+            document.getElementById("locket-display-box").style.display = "flex";
         }
 
-        function goBackToThirdPage() {
-            document.getElementById("fourth-page").style.display = "none";
-            document.getElementById("third-page").style.display = "block";
+        function returnToHub(currentTabId) {
+            // Close active stage content layout view
+            if (currentTabId === 'cassette') document.getElementById("page-cassette").style.display = "none";
+            if (currentTabId === 'tulips') document.getElementById("page-tulips").style.display = "none";
+            if (currentTabId === 'envelope') document.getElementById("page-envelope").style.display = "none";
+            if (currentTabId === 'camera') document.getElementById("page-camera").style.display = "none";
+            
+            document.getElementById("main-picnic").style.display = "block";
+            verifyCompletionState();
         }
 
-        function goBackToSecondPage() {
-            document.getElementById("third-page").style.display = "none";
-            document.getElementById("secret-content").style.display = "block";
+        function verifyCompletionState() {
+            // Evaluates if all 4 target tracking keys reflect true status flags
+            if (trackingList.cassette && trackingList.tulips && trackingList.envelope && trackingList.camera) {
+                document.getElementById("snoopy-box").style.display = "block";
+                // Scrolls smooth downward window view directly targeting control triggers
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+        }
+
+        function goToFinalPage() {
+            document.getElementById("main-picnic").style.display = "none";
+            document.getElementById("page-final").style.display = "block";
         }
     </script>
 
