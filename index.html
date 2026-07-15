@@ -7,64 +7,52 @@
     <style>
         * { box-sizing: border-box; }
         
-        /* 🌿 PERSISTENT REALISTIC BIRDS-EYE VIEW BACKDROP */
         body {
-            /* Realistic grass texture pattern with deep rich green colors */
-            background-color: #3b5a20;
-            background-image: 
-                radial-gradient(circle at 50% 50%, #4f772d 20%, transparent 20%),
-                radial-gradient(circle at 0 0, #31572c 40%, transparent 40%),
-                radial-gradient(circle at 100% 100%, #132a13 30%, transparent 30%);
-            background-size: 40px 40px;
+            background-color: #2b4c1e;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
-            padding: 20px;
-            color: #fb6f92;
+            padding: 0;
             margin: 0;
+            color: #fb6f92;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
         }
         
-        /* 🧺 THE PERSISTENT PICNIC MAT CONTAINER */
+        /* 🧺 MAIN ULTRA-REALISTIC PICNIC CONTAINER */
         .container {
             width: 100%;
-            max-width: 1100px;
-            min-height: 85vh;
-            margin: 10px auto;
-            border-radius: 30px;
+            max-width: 1200px;
+            min-height: 90vh;
             position: relative;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 40px;
+            padding: 40px 20px;
             
-            /* Ultra-realistic woven linen picnic blanket background (Red & White Gingham) */
-            background-color: #fcfaf7;
-            background-image: 
-                linear-gradient(90deg, rgba(204, 30, 41, 0.15) 50%, transparent 50%),
-                linear-gradient(rgba(204, 30, 41, 0.15) 50%, transparent 50%);
-            background-size: 60px 60px;
+            /* LINK TO YOUR ACTUAL PICNIC PHOTO BELOW */
+            background-image: url('picnic_bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             
-            /* Realistic cloth edges with drop shadow onto the "grass" */
-            border: 12px double #fdf6e2;
-            box-shadow: 
-                0 25px 50px -12px rgba(0, 0, 0, 0.6),
-                inset 0 0 40px rgba(0, 0, 0, 0.1);
+            border-radius: 24px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            overflow: hidden;
         }
 
-        /* 📋 GLASS-MORPHISM CONTENT CARDS */
-        /* This acts as our "tabletop" on the picnic blanket so text remains beautifully readable */
+        /* 📋 GLASS-MORPHISM INTERFACE LAYER */
+        /* Keeps text perfectly readable while showing the realistic background underneath */
         .content-card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.15);
             width: 100%;
             max-width: 950px;
             margin: 0 auto;
@@ -72,12 +60,12 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(12px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        h1 { font-size: 2.6rem; margin-top: 0; margin-bottom: 15px; font-weight: 800; color: #d64566; text-shadow: 1px 1px 1px rgba(255,255,255,0.8); }
-        p { font-size: 1.1rem; line-height: 1.6; color: #4a4a4a; max-width: 750px; margin: 0 auto 20px auto; }
+        h1 { font-size: 2.6rem; margin-top: 0; margin-bottom: 15px; font-weight: 800; color: #d64566; }
+        p { font-size: 1.1rem; line-height: 1.6; color: #3d3d3d; max-width: 750px; margin: 0 auto 20px auto; }
         
         input {
             padding: 14px;
@@ -88,7 +76,6 @@
             margin-bottom: 20px;
             outline: none;
             text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
         
         button {
@@ -108,11 +95,9 @@
         .back-btn {
             background-color: #6c757d;
             margin-top: 25px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
         }
         .back-btn:hover { background-color: #495057; }
 
-        /* Sections Hidden Initially */
         #secret-content, #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final {
             display: none;
             width: 100%;
@@ -120,50 +105,40 @@
 
         .error { color: #ff4d6d; font-weight: bold; margin-bottom: 15px; }
 
-        /* 🧺 BIRDS-EYE VIEW PICNIC HUB */
+        /* 🧺 BIRDS-EYE LAYOUT CLICK ZONES */
         .flatlay-scene {
             position: relative;
             width: 100%;
-            height: 480px;
+            height: 500px;
             margin-top: 10px;
         }
 
-        /* 3D Basket - Viewed from directly above */
-        .basket-flatlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 130px;
-            line-height: 1;
-            cursor: default;
-            /* Casts a realistic, dramatic flat shadow onto the cloth */
-            filter: drop-shadow(15px 25px 12px rgba(0, 0, 0, 0.35));
-            user-select: none;
-            z-index: 5;
-        }
-
-        /* 3D Scattered Picnic Items (Directly clickable, realistic shadows) */
+        /* Interactive photographic item overlays */
         .picnic-item {
             position: absolute;
-            font-size: 65px;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease;
-            /* Simulates distance from the mat with realistic blurring & off-center shadows */
-            filter: drop-shadow(10px 18px 8px rgba(0, 0, 0, 0.3));
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             user-select: none;
-            z-index: 10;
-        }
-        .picnic-item:hover {
-            transform: scale(1.18) rotate(8deg);
-            filter: drop-shadow(15px 24px 12px rgba(0, 0, 0, 0.35));
         }
         
-        /* Scattered layout around central basket */
-        #item-cassette { top: 15%; left: 15%; }
-        #item-tulips   { top: 65%; left: 20%; }
-        #item-envelope { top: 68%; right: 20%; }
-        #item-camera   { top: 18%; right: 15%; }
+        /* Realistic photo dimensions */
+        .picnic-item img {
+            width: 110px;
+            height: auto;
+            display: block;
+            /* Casts a heavy photographic top-down shadow onto the blanket image */
+            filter: drop-shadow(12px 20px 10px rgba(0, 0, 0, 0.45));
+        }
+        
+        .picnic-item:hover {
+            transform: scale(1.15) rotate(4deg);
+        }
+        
+        /* Absolute position mapping over the flatlay background */
+        #item-cassette { top: 22%; left: 18%; }
+        #item-tulips   { top: 62%; left: 24%; }
+        #item-envelope { top: 65%; right: 22%; }
+        #item-camera   { top: 25%; right: 18%; }
 
         /* 📻 CASSETTE STAGE */
         .cassette-layout {
@@ -177,9 +152,8 @@
         .center-video { width: 50%; display: flex; justify-content: center; }
         .right-booth { width: 25%; display: flex; flex-direction: column; gap: 15px; align-items: center; }
         
-        .booth-img { width: 160px; height: 210px; object-fit: cover; border: 8px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border-radius: 2px; }
+        .booth-img { width: 160px; height: 210px; object-fit: cover; border: 8px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.15); }
         
-        /* Realistic Vinyl Record Deck */
         .record-player {
             width: 160px;
             height: 160px;
@@ -206,7 +180,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
             width: 100%;
         }
         .locket-interactive {
@@ -214,7 +187,7 @@
             cursor: pointer;
             transition: 0.3s;
             margin-bottom: 20px;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.2));
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.25));
         }
         .locket-photos {
             display: none;
@@ -236,7 +209,6 @@
             justify-content: center;
             gap: 12px;
             max-width: 850px;
-            margin-top: 10px;
         }
         .bubble-heart {
             background: #fff5f6;
@@ -255,7 +227,7 @@
             border: 4px solid #8c5a3c;
             border-radius: 12px;
             padding: 35px;
-            margin: 0 auto 20px auto;
+            margin-bottom: 20px;
             width: 100%;
             box-shadow: inset 0 0 30px rgba(140, 90, 60, 0.15), 0 12px 24px rgba(0,0,0,0.1);
             position: relative;
@@ -281,20 +253,19 @@
             margin-top: 25px;
         }
         .letter-booth-img {
-            width: 180px; height: 230px; object-fit: cover; border: 8px solid white; border-radius: 2px; box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+            width: 180px; height: 230px; object-fit: cover; border: 8px solid white; box-shadow: 0 10px 18px rgba(0,0,0,0.15);
         }
 
         /* 📷 CAMERA PHOTO BOARD */
         .photo-board {
             width: 100%;
-            background: #efe3ce; /* Vintage cardboard/cork style */
+            background: #efe3ce;
             border: 8px solid #8c5a3c;
             border-radius: 16px;
             padding: 30px 20px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            flex-wrap: nowrap;
             gap: 15px;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
         }
@@ -302,7 +273,6 @@
             background: white;
             padding: 10px 10px 25px 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.18);
-            transition: 0.2s;
         }
         .board-card img { width: 130px; height: 155px; object-fit: cover; display: block; }
         
@@ -317,7 +287,6 @@
 
         #gallery-svg-clip { width: 0; height: 0; position: absolute; }
 
-        /* SNOOPY PANEL */
         .snoopy-unlock-panel {
             margin-top: 25px;
             background: #fff0f3;
@@ -352,13 +321,8 @@
             border-width: 20px 20px 0; border-style: solid; border-color: #f8f9fa transparent;
             display: block; width: 0;
         }
-        .bubble-frame::before {
-            content: ''; position: absolute; bottom: -24px; left: 78px;
-            border-width: 22px 22px 0; border-style: solid; border-color: #333 transparent;
-            display: block; width: 0; z-index: -1;
-        }
         .bubble-frame p { font-size: 1.4rem; font-weight: bold; color: #333; margin: 0; }
-        .final-img { max-width: 450px; border: 10px solid white; box-shadow: 0 12px 28px rgba(0,0,0,0.25); border-radius: 4px; }
+        .final-img { max-width: 450px; border: 10px solid white; box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
     </style>
 </head>
 <body>
@@ -376,21 +340,21 @@
         <div id="login-screen" class="content-card">
             <h1>🔒 Restricted Access</h1>
             <p>Hi my lovee, to unlock this amazing present, please enter our secret password.</p>
-            <p style="font-size: 0.9rem; font-style: italic; color: #7a7a7a;">Hint: The date of our first official anniversary (Format: MMDDYY)</p>
+            <p style="font-size: 0.9rem; font-style: italic; color: #666;">Hint: The date of our first official anniversary (Format: MMDDYY)</p>
             
             <input type="text" id="password-input" placeholder="Type password here...">
             <br>
             <button onclick="checkPassword()">Unlock ❤️</button>
             <div id="error-message" class="error"></div>
             <br>
-            <img src="front.jpg" alt="Cover photo" style="margin-top: 15px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.15); max-width: 360px;">
+            <img src="front.jpg" alt="Cover photo" style="margin-top: 15px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.2); max-width: 360px;">
         </div>
 
         <div id="secret-content" class="content-card">
             <h1>Happy Monthsary, Beautiful! 🎉</h1>
             <p>You got the password &lt;3 ! Every single day with you is a blessing, no matter how many miles are between us. Thank you for being the best girlfriend ever.</p>
             
-            <img src="us.jpeg" alt="A cute picture of us" style="max-width: 380px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.12);">
+            <img src="us.jpeg" alt="A cute picture of us" style="max-width: 380px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
             
             <div>
                 <button onclick="goToPicnicHub()" class="heart-btn" style="background: none; border: none; font-size: 60px; cursor: pointer; animation: pulse 1.2s infinite ease-in-out;">❤️</button>
@@ -398,19 +362,25 @@
             </div>
         </div>
 
-        <div id="main-picnic">
-            <div class="content-card" style="background: rgba(255, 255, 255, 0.7); margin-bottom: 10px; padding: 15px 25px;">
+        <div id="main-picnic" style="width: 100%;">
+            <div class="content-card" style="background: rgba(255, 255, 255, 0.75); margin-bottom: 10px; padding: 15px 25px;">
                 <h1 style="font-size: 2.2rem; margin-bottom: 5px;">Our Romantic Picnic Spot 🧺</h1>
-                <p style="margin-bottom: 0;">Look around the mat! Tap the items surrounding the basket from our bird's-eye view to discover surprises.</p>
+                <p style="margin-bottom: 0;">Look around the mat! Tap the objects scattered across our bird's-eye view to discover surprises.</p>
             </div>
             
             <div class="flatlay-scene">
-                <div class="basket-flatlay">🧺</div>
-                
-                <div id="item-cassette" class="picnic-item" onclick="openActivity('cassette')">📻</div>
-                <div id="item-tulips" class="picnic-item" onclick="openActivity('tulips')">🌷</div>
-                <div id="item-envelope" class="picnic-item" onclick="openActivity('envelope')">✉️</div>
-                <div id="item-camera" class="picnic-item" onclick="openActivity('camera')">📷</div>
+                <div id="item-cassette" class="picnic-item" onclick="openActivity('cassette')">
+                    <img src="pic_cassette.png" alt="Cassette Tape">
+                </div>
+                <div id="item-tulips" class="picnic-item" onclick="openActivity('tulips')">
+                    <img src="pic_tulips.png" alt="Pink Tulips">
+                </div>
+                <div id="item-envelope" class="picnic-item" onclick="openActivity('envelope')">
+                    <img src="pic_envelope.png" alt="Pink Envelope">
+                </div>
+                <div id="item-camera" class="picnic-item" onclick="openActivity('camera')">
+                    <img src="pic_camera.png" alt="Vintage Camera">
+                </div>
             </div>
 
             <div id="snoopy-box" class="snoopy-unlock-panel" style="max-width: 600px; margin: 20px auto 0 auto;">
