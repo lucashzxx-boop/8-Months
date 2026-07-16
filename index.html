@@ -286,8 +286,8 @@
         }
 
         @keyframes photoReveal {
-            from { transform: translateY(15px) scale(0.95); }
-            to { }
+            from { transform: translateY(15px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
         #gallery-svg-clip { width: 0; height: 0; position: absolute; }
@@ -562,7 +562,10 @@
                 for (let i = 1; i <= 3; i++) {
                     setTimeout(() => {
                         const el = document.getElementById(`let-img-${i}`);
-                        if(el) el.classList.add('animate-pop-in');
+                        if(el) {
+                            el.style.opacity = "1";
+                            el.classList.add('animate-pop-in');
+                        }
                     }, (i - 1) * 400);
                 }
             }
