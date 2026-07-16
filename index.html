@@ -113,8 +113,11 @@
         .picnic-item {
             position: absolute;
             cursor: pointer;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             user-select: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
         .picnic-item img {
@@ -127,11 +130,67 @@
         .picnic-item:hover {
             transform: scale(1.15) rotate(4deg);
         }
-        
-        #item-cassette { top: 22%; left: 18%; }
-        #item-tulips   { top: 62%; left: 24%; }
-        #item-envelope { top: 65%; right: 22%; }
-        #item-camera   { top: 25%; right: 18%; }
+
+        /* 🌬️ GENTLE FLOATING ANIMATIONS */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        #item-cassette { top: 22%; left: 18%; animation: float 4s ease-in-out infinite; }
+        #item-tulips   { top: 62%; left: 24%; animation: float 4.5s ease-in-out infinite; animation-delay: 0.5s; }
+        #item-envelope { top: 65%; right: 22%; animation: float 3.8s ease-in-out infinite; animation-delay: 1s; }
+        #item-camera   { top: 25%; right: 18%; animation: float 4.2s ease-in-out infinite; animation-delay: 1.5s; }
+
+        /* 💬 ROMANTIC HOVER TOOLTIPS */
+        .picnic-item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -35px;
+            background: rgba(251, 111, 146, 0.95);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            white-space: nowrap;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            z-index: 10;
+        }
+
+        .picnic-item:hover::after {
+            opacity: 1;
+            transform: scale(1) translateY(5px);
+        }
+
+        /* 💖 COMPLETION CHECKMARK MARKERS */
+        .completed-mark {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff007f;
+            color: white;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+            transform: scale(0);
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 5;
+        }
+
+        .completed-mark.show {
+            transform: scale(1);
+        }
 
         /* 📻 CASSETTE STAGE */
         .cassette-layout {
@@ -392,7 +451,7 @@
             align-items: center;
             justify-content: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            touch-action: none; /* Prevents scrolling when dragging on mobile */
+            touch-action: none;
         }
         .falling-item {
             position: absolute;
@@ -458,16 +517,20 @@
             </div>
             
             <div class="flatlay-scene">
-                <div id="item-cassette" class="picnic-item" onclick="openActivity('cassette')">
+                <div id="item-cassette" class="picnic-item" onclick="openActivity('cassette')" data-tooltip="Our soundtrack 📻">
+                    <div id="mark-cassette" class="completed-mark">❤️</div>
                     <img src="pic_cassette.png" alt="Cassette Tape">
                 </div>
-                <div id="item-tulips" class="picnic-item" onclick="openActivity('tulips')">
+                <div id="item-tulips" class="picnic-item" onclick="openActivity('tulips')" data-tooltip="Why I love you 🌷">
+                    <div id="mark-tulips" class="completed-mark">❤️</div>
                     <img src="pic_tulips.png" alt="Pink Tulips">
                 </div>
-                <div id="item-envelope" class="picnic-item" onclick="openActivity('envelope')">
+                <div id="item-envelope" class="picnic-item" onclick="openActivity('envelope')" data-tooltip="Read my letter ✉️">
+                    <div id="mark-envelope" class="completed-mark">❤️</div>
                     <img src="pic_envelope.png" alt="Pink Envelope">
                 </div>
-                <div id="item-camera" class="picnic-item" onclick="openActivity('camera')">
+                <div id="item-camera" class="picnic-item" onclick="openActivity('camera')" data-tooltip="Our memories 📷">
+                    <div id="mark-camera" class="completed-mark">❤️</div>
                     <img src="pic_camera.png" alt="Vintage Camera">
                 </div>
             </div>
@@ -480,7 +543,7 @@
 
         <div id="page-cassette" class="content-card">
             <h1>The Song That Reminds Me Of You 🎵</h1>
-            <p>Press play and sit back! And listen to this track while you go through the rest of the surprises😘</p>
+            <p>Press play and listen to this track while you go through the rest of the surprises😘 (Youtube might give you an add, be patient my beautiful princess😊)</p>
             
             <div class="cassette-layout">
                 <div class="left-player">
@@ -586,8 +649,8 @@
         </div>
 
         <div id="page-game" class="content-card">
-            <h1>Memory Game 🧩</h1>
-            <p>Hey babyyy, match all the emojis to win!! Goodluck❤️ </p>
+            <h1>Memory Match Game 🧩</h1>
+            <p>Hey babyyyy, match all the emojis to win! Goodluck❤️</p>
             
             <div class="game-grid" id="memory-grid"></div>
             
@@ -615,7 +678,7 @@
                 <button class="control-btn" onmousedown="moveBasketRight()" ontouchstart="moveBasketRight()">Move Right ▶</button>
             </div>
 
-            <h3 id="catch-win-message" style="color: #ff007f; display: none; margin-top: 15px; font-size: 1.3rem;">🎉 GOOD JOB PRINCESSSS, you caught my whole heart ❤️</h3>
+            <h3 id="catch-win-message" style="color: #ff007f; display: none; margin-top: 15px; font-size: 1.3rem;">🎉GOOD JOB PRINCESSSS! You caught my whole heart! ❤️</h3>
 
             <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
                 <button onclick="resetCatchGame()" style="background-color: #6c757d;">Restart Game 🔄</button>
@@ -730,6 +793,12 @@
             if (currentTabId === 'camera') document.getElementById("page-camera").style.display = "none";
             if (currentTabId === 'final') document.getElementById("page-final").style.display = "none";
             
+            // Show the little complete heart checkmark next to the item in the hub
+            const mark = document.getElementById(`mark-${currentTabId}`);
+            if (mark) {
+                mark.classList.add("show");
+            }
+
             document.getElementById("main-picnic").style.display = "block";
             verifyCompletionState();
         }
@@ -885,11 +954,7 @@
         function startCatchGame() {
             if (catchActive) return;
             catchActive = true;
-            
-            // Spawn items periodically
             fallingInterval = setInterval(spawnFallingItem, 1000);
-            
-            // Core game cycle/gravity loop
             physicsInterval = setInterval(updatePhysics, 40);
         }
 
@@ -897,7 +962,6 @@
             catchActive = false;
             clearInterval(fallingInterval);
             clearInterval(physicsInterval);
-            // Clear out remaining elements
             const existingItems = document.querySelectorAll('.falling-item');
             existingItems.forEach(item => item.remove());
         }
@@ -919,7 +983,6 @@
             item.className = "falling-item";
             item.innerText = catchItems[Math.floor(Math.random() * catchItems.length)];
             
-            // Random X placement inside game container width
             const randomX = Math.floor(Math.random() * (catchArea.offsetWidth - 30));
             item.style.left = randomX + "px";
             item.style.top = "0px";
@@ -936,18 +999,15 @@
 
             items.forEach(item => {
                 let currentTop = parseInt(item.style.top) || 0;
-                let nextTop = currentTop + 6; // Falling speed
+                let nextTop = currentTop + 6; 
                 item.style.top = nextTop + "px";
 
-                // Check collision bounds
                 const itemRect = item.getBoundingClientRect();
 
-                // Hit ground
                 if (nextTop >= catchArea.offsetHeight - 25) {
                     item.remove();
                 }
 
-                // Check basket collision
                 if (
                     itemRect.bottom >= basketRect.top &&
                     itemRect.bottom <= basketRect.bottom &&
@@ -966,7 +1026,6 @@
             });
         }
 
-        // Left / Right Movement
         function moveBasketLeft() {
             basketX = Math.max(0, basketX - basketSpeed);
             basket.style.left = basketX + "px";
@@ -977,7 +1036,6 @@
             basket.style.left = basketX + "px";
         }
 
-        // Handle keyboard controls
         document.addEventListener("keydown", function(e) {
             if (!catchActive) return;
             if (e.key === "ArrowLeft") {
@@ -987,7 +1045,7 @@
             }
         });
 
-        // Touch dragging logic support for mobile
+        // Touch drag support for phone and tablet screens
         let isDragging = false;
         basket.addEventListener('touchstart', () => { isDragging = true; });
         catchArea.addEventListener('touchmove', (e) => {
@@ -996,7 +1054,6 @@
             const areaRect = catchArea.getBoundingClientRect();
             let relativeX = touch.clientX - areaRect.left - (basket.offsetWidth / 2);
             
-            // Constrain
             relativeX = Math.max(0, Math.min(catchArea.offsetWidth - basket.offsetWidth, relativeX));
             basketX = relativeX;
             basket.style.left = basketX + "px";
