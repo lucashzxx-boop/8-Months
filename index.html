@@ -95,7 +95,7 @@
         }
         .back-btn:hover { background-color: #495057; }
 
-        #secret-content, #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final, #page-game {
+        #secret-content, #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final, #page-game, #page-catch-game {
             display: none;
             width: 100%;
         }
@@ -224,7 +224,7 @@
         .letter-booth-row { display: flex; justify-content: center; gap: 20px; margin-top: 25px; }
         .letter-booth-img { width: 180px; height: 230px; object-fit: cover; border: 8px solid white; box-shadow: 0 10px 18px rgba(0,0,0,0.15); opacity: 0; }
 
-        /* 📷 CAMERA GALLERY ARCHITECTURE - ABSOLUTE CONTAINMENT FLUID WRAPPERS */
+        /* 📷 CAMERA GALLERY ARCHITECTURE */
         .photo-board {
             width: 100%;
             background: #d4bda2;
@@ -365,6 +365,53 @@
             pointer-events: none;
             box-shadow: none;
         }
+
+        /* 🧺 CATCH GAME DESIGN */
+        .catch-game-area {
+            width: 100%;
+            max-width: 500px;
+            height: 350px;
+            background-color: #fceade;
+            border: 4px dashed #ff8fa3;
+            border-radius: 16px;
+            position: relative;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+        .basket {
+            width: 70px;
+            height: 45px;
+            background: #b5651d;
+            border-radius: 0 0 15px 15px;
+            border-top: 5px solid #8b4513;
+            position: absolute;
+            bottom: 10px;
+            left: 215px;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            touch-action: none; /* Prevents scrolling when dragging on mobile */
+        }
+        .falling-item {
+            position: absolute;
+            font-size: 1.8rem;
+            user-select: none;
+            pointer-events: none;
+        }
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .control-btn {
+            background-color: #fb6f92;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -489,9 +536,9 @@
             </div>
 
             <div class="letter-booth-row">
-                <img src="letter1.JPG" id="let-img-1" class="letter-booth-img" alt="Letter Strip 1">
-                <img src="letter2.JPG" id="let-img-2" class="letter-booth-img" alt="Letter Strip 2">
-                <img src="letter3.JPG" id="let-img-3" class="letter-booth-img" alt="Letter Strip 3">
+                <img src="letter1.jpg" id="let-img-1" class="letter-booth-img" alt="Letter Strip 1">
+                <img src="letter2.jpg" id="let-img-2" class="letter-booth-img" alt="Letter Strip 2">
+                <img src="letter3.jpg" id="let-img-3" class="letter-booth-img" alt="Letter Strip 3">
             </div>
 
             <br>
@@ -503,16 +550,16 @@
             <p>Every single frame tells part of our beautiful 8-month story.</p>
             
             <div class="photo-board">
-                <div class="board-card c-oval tilt-l dynamic-photo" id="cam-img-1"><div class="img-container-crop"><img src="gallery1.JPG" alt="G1" loading="lazy"></div></div>
-                <div class="board-card c-heart tilt-r dynamic-photo" id="cam-img-2"><div class="img-container-crop"><img src="gallery2.JPG" alt="G2" loading="lazy"></div></div>
-                <div class="board-card c-square tilt-s dynamic-photo" id="cam-img-3"><div class="img-container-crop"><img src="gallery3.JPG" alt="G3" loading="lazy"></div></div>
-                <div class="board-card c-oval tilt-m dynamic-photo" id="cam-img-4"><div class="img-container-crop"><img src="gallery4.JPG" alt="G4" loading="lazy"></div></div>
-                <div class="board-card c-heart tilt-l dynamic-photo" id="cam-img-5"><div class="img-container-crop"><img src="gallery5.JPG" alt="G5" loading="lazy"></div></div>
-                <div class="board-card c-square tilt-r dynamic-photo" id="cam-img-6"><div class="img-container-crop"><img src="gallery6.JPG" alt="G6" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-l dynamic-photo" id="cam-img-1"><div class="img-container-crop"><img src="gallery1.jpg" alt="G1" loading="lazy"></div></div>
+                <div class="board-card c-heart tilt-r dynamic-photo" id="cam-img-2"><div class="img-container-crop"><img src="gallery2.jpg" alt="G2" loading="lazy"></div></div>
+                <div class="board-card c-square tilt-s dynamic-photo" id="cam-img-3"><div class="img-container-crop"><img src="gallery3.jpg" alt="G3" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-m dynamic-photo" id="cam-img-4"><div class="img-container-crop"><img src="gallery4.jpg" alt="G4" loading="lazy"></div></div>
+                <div class="board-card c-heart tilt-l dynamic-photo" id="cam-img-5"><div class="img-container-crop"><img src="gallery5.jpg" alt="G5" loading="lazy"></div></div>
+                <div class="board-card c-square tilt-r dynamic-photo" id="cam-img-6"><div class="img-container-crop"><img src="gallery6.jpg" alt="G6" loading="lazy"></div></div>
                 <div class="board-card c-oval tilt-s dynamic-photo" id="cam-img-7"><div class="img-container-crop"><img src="gallery7.JPG" alt="G7" loading="lazy"></div></div>
                 <div class="board-card c-heart tilt-m dynamic-photo" id="cam-img-8"><div class="img-container-crop"><img src="gallery8.JPG" alt="G8" loading="lazy"></div></div>
                 <div class="board-card c-square tilt-l dynamic-photo" id="cam-img-9"><div class="img-container-crop"><img src="gallery9.JPG" alt="G9" loading="lazy"></div></div>
-                <div class="board-card c-oval tilt-r dynamic-photo" id="cam-img-10"><div class="img-container-crop"><img src="gallery10.JPG" alt="G10" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-r dynamic-photo" id="cam-img-10"><div class="img-container-crop"><img src="gallery10.jpg" alt="G10" loading="lazy"></div></div>
             </div>
             
             <br>
@@ -531,9 +578,10 @@
             </div>
             
             <br>
-            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
                 <button onclick="returnToHub('final')" class="back-btn" style="margin-top: 0;">Return to Picnic 🧺</button>
-                <button onclick="openGamePage()" style="background-color: #ff007f; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.3);">Play a game with me? 🎮</button>
+                <button onclick="openGamePage()" style="background-color: #ff007f; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.3);">Play Memory Match 🧩</button>
+                <button onclick="openCatchGamePage()" style="background-color: #ff3366; box-shadow: 0 4px 12px rgba(255, 51, 102, 0.3);">Catch Falling Hearts! 🧺❤️</button>
             </div>
         </div>
 
@@ -545,9 +593,34 @@
             
             <h3 id="game-win-message" style="color: #ff007f; display: none; margin-top: 15px; font-size: 1.3rem;">🎉 You matched them all! You have an amazing memory, my beautiful Sammy!</h3>
             
-            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
                 <button onclick="resetGame()" style="background-color: #6c757d;">Restart Game 🔄</button>
-                <button onclick="exitGame()" class="back-btn" style="margin-top: 0;">Back to Message 📜</button>
+                <button onclick="openCatchGamePage()" style="background-color: #ff3366;">Play Catch Hearts! 🧺</button>
+                <button onclick="exitGame('page-game')" class="back-btn" style="margin-top: 0;">Back to Message 📜</button>
+            </div>
+        </div>
+
+        <div id="page-catch-game" class="content-card">
+            <h1>Catch the Falling Hearts! 🧺❤️</h1>
+            <p>Slide the basket left and right to catch the falling hearts and flowers! Catch 15 to win!</p>
+            
+            <h2 style="color: #ff007f; margin: 10px 0;">Score: <span id="catch-score">0</span> / 15</h2>
+            
+            <div class="catch-game-area" id="catch-area">
+                <div class="basket" id="basket-element">🧺</div>
+            </div>
+
+            <div class="game-controls">
+                <button class="control-btn" onmousedown="moveBasketLeft()" ontouchstart="moveBasketLeft()">◀ Move Left</button>
+                <button class="control-btn" onmousedown="moveBasketRight()" ontouchstart="moveBasketRight()">Move Right ▶</button>
+            </div>
+
+            <h3 id="catch-win-message" style="color: #ff007f; display: none; margin-top: 15px; font-size: 1.3rem;">🎉 Sweet victory! You caught my whole heart, Sammy! ❤️</h3>
+
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px; flex-wrap: wrap;">
+                <button onclick="resetCatchGame()" style="background-color: #6c757d;">Restart Game 🔄</button>
+                <button onclick="openGamePage()" style="background-color: #ff007f;">Play Memory Match 🧩</button>
+                <button onclick="exitGame('page-catch-game')" class="back-btn" style="margin-top: 0;">Back to Message 📜</button>
             </div>
         </div>
 
@@ -695,7 +768,13 @@
             }
         }
 
-        /* 🎮 MEMORY MATCH GAME SCRIPTING */
+        function exitGame(currentTabId) {
+            document.getElementById(currentTabId).style.display = "none";
+            document.getElementById("page-final").style.display = "block";
+            stopCatchGame();
+        }
+
+        /* 🎮 GAME 1: MEMORY MATCH SCRIPTING */
         const emojis = ["🧺", "🌷", "📻", "🧸", "💍", "💋"];
         let gameCards = [...emojis, ...emojis];
         let selectedCards = [];
@@ -704,13 +783,10 @@
 
         function openGamePage() {
             document.getElementById("page-final").style.display = "none";
+            document.getElementById("page-catch-game").style.display = "none";
             document.getElementById("page-game").style.display = "block";
+            stopCatchGame();
             resetGame();
-        }
-
-        function exitGame() {
-            document.getElementById("page-game").style.display = "none";
-            document.getElementById("page-final").style.display = "block";
         }
 
         function shuffle(array) {
@@ -786,6 +862,146 @@
             document.getElementById("game-win-message").style.display = "none";
             buildGameBoard();
         }
+
+
+        /* 🧺 GAME 2: CATCH THE FALLING HEARTS SCRIPTING */
+        let catchScore = 0;
+        let basketX = 215;
+        const basketSpeed = 30;
+        let fallingInterval;
+        let physicsInterval;
+        let catchActive = false;
+        const catchItems = ["❤️", "💖", "🌷", "🌸", "💕"];
+        const basket = document.getElementById("basket-element");
+        const catchArea = document.getElementById("catch-area");
+
+        function openCatchGamePage() {
+            document.getElementById("page-final").style.display = "none";
+            document.getElementById("page-game").style.display = "none";
+            document.getElementById("page-catch-game").style.display = "block";
+            resetCatchGame();
+        }
+
+        function startCatchGame() {
+            if (catchActive) return;
+            catchActive = true;
+            
+            // Spawn items periodically
+            fallingInterval = setInterval(spawnFallingItem, 1000);
+            
+            // Core game cycle/gravity loop
+            physicsInterval = setInterval(updatePhysics, 40);
+        }
+
+        function stopCatchGame() {
+            catchActive = false;
+            clearInterval(fallingInterval);
+            clearInterval(physicsInterval);
+            // Clear out remaining elements
+            const existingItems = document.querySelectorAll('.falling-item');
+            existingItems.forEach(item => item.remove());
+        }
+
+        function resetCatchGame() {
+            stopCatchGame();
+            catchScore = 0;
+            basketX = 215;
+            basket.style.left = basketX + "px";
+            document.getElementById("catch-score").innerText = catchScore;
+            document.getElementById("catch-win-message").style.display = "none";
+            startCatchGame();
+        }
+
+        function spawnFallingItem() {
+            if (!catchActive) return;
+            
+            const item = document.createElement("div");
+            item.className = "falling-item";
+            item.innerText = catchItems[Math.floor(Math.random() * catchItems.length)];
+            
+            // Random X placement inside game container width
+            const randomX = Math.floor(Math.random() * (catchArea.offsetWidth - 30));
+            item.style.left = randomX + "px";
+            item.style.top = "0px";
+            
+            catchArea.appendChild(item);
+        }
+
+        function updatePhysics() {
+            if (!catchActive) return;
+            
+            const items = document.querySelectorAll(".falling-item");
+            const basketRect = basket.getBoundingClientRect();
+            const catchAreaRect = catchArea.getBoundingClientRect();
+
+            items.forEach(item => {
+                let currentTop = parseInt(item.style.top) || 0;
+                let nextTop = currentTop + 6; // Falling speed
+                item.style.top = nextTop + "px";
+
+                // Check collision bounds
+                const itemRect = item.getBoundingClientRect();
+
+                // Hit ground
+                if (nextTop >= catchArea.offsetHeight - 25) {
+                    item.remove();
+                }
+
+                // Check basket collision
+                if (
+                    itemRect.bottom >= basketRect.top &&
+                    itemRect.bottom <= basketRect.bottom &&
+                    itemRect.right >= basketRect.left &&
+                    itemRect.left <= basketRect.right
+                ) {
+                    item.remove();
+                    catchScore++;
+                    document.getElementById("catch-score").innerText = catchScore;
+
+                    if (catchScore >= 15) {
+                        document.getElementById("catch-win-message").style.display = "block";
+                        stopCatchGame();
+                    }
+                }
+            });
+        }
+
+        // Left / Right Movement
+        function moveBasketLeft() {
+            basketX = Math.max(0, basketX - basketSpeed);
+            basket.style.left = basketX + "px";
+        }
+
+        function moveBasketRight() {
+            basketX = Math.min(catchArea.offsetWidth - basket.offsetWidth, basketX + basketSpeed);
+            basket.style.left = basketX + "px";
+        }
+
+        // Handle keyboard controls
+        document.addEventListener("keydown", function(e) {
+            if (!catchActive) return;
+            if (e.key === "ArrowLeft") {
+                moveBasketLeft();
+            } else if (e.key === "ArrowRight") {
+                moveBasketRight();
+            }
+        });
+
+        // Touch dragging logic support for mobile
+        let isDragging = false;
+        basket.addEventListener('touchstart', () => { isDragging = true; });
+        catchArea.addEventListener('touchmove', (e) => {
+            if (!isDragging || !catchActive) return;
+            const touch = e.touches[0];
+            const areaRect = catchArea.getBoundingClientRect();
+            let relativeX = touch.clientX - areaRect.left - (basket.offsetWidth / 2);
+            
+            // Constrain
+            relativeX = Math.max(0, Math.min(catchArea.offsetWidth - basket.offsetWidth, relativeX));
+            basketX = relativeX;
+            basket.style.left = basketX + "px";
+        });
+        document.addEventListener('touchend', () => { isDragging = false; });
     </script>
 </body>
 </html>
