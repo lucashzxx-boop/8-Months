@@ -95,7 +95,7 @@
         }
         .back-btn:hover { background-color: #495057; }
 
-        #secret-content, #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final {
+        #secret-content, #main-picnic, #page-cassette, #page-tulips, #page-envelope, #page-camera, #page-final, #page-game {
             display: none;
             width: 100%;
         }
@@ -334,6 +334,37 @@
             from { transform: translateY(0) scale(1); }
             to { transform: translateY(-15px) scale(1.15); }
         }
+
+        /* 🎮 MEMORY GAME DESIGN */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 440px;
+            margin: 20px auto;
+        }
+        .game-card {
+            aspect-ratio: 1;
+            background-color: #ffccd5;
+            border-radius: 12px;
+            font-size: 2.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            user-select: none;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s;
+        }
+        .game-card.flipped {
+            background-color: #fff;
+            transform: rotateY(180deg);
+        }
+        .game-card.matched {
+            background-color: #e2f0d9;
+            pointer-events: none;
+            box-shadow: none;
+        }
     </style>
 </head>
 <body>
@@ -458,9 +489,9 @@
             </div>
 
             <div class="letter-booth-row">
-                <img src="letter1.jpg" id="let-img-1" class="letter-booth-img" alt="Letter Strip 1">
-                <img src="letter2.jpg" id="let-img-2" class="letter-booth-img" alt="Letter Strip 2">
-                <img src="letter3.jpg" id="let-img-3" class="letter-booth-img" alt="Letter Strip 3">
+                <img src="letter1.JPG" id="let-img-1" class="letter-booth-img" alt="Letter Strip 1">
+                <img src="letter2.JPG" id="let-img-2" class="letter-booth-img" alt="Letter Strip 2">
+                <img src="letter3.JPG" id="let-img-3" class="letter-booth-img" alt="Letter Strip 3">
             </div>
 
             <br>
@@ -472,16 +503,16 @@
             <p>Every single frame tells part of our beautiful 8-month story.</p>
             
             <div class="photo-board">
-                <div class="board-card c-oval tilt-l dynamic-photo" id="cam-img-1"><div class="img-container-crop"><img src="gallery1.jpg" alt="G1" loading="lazy"></div></div>
-                <div class="board-card c-heart tilt-r dynamic-photo" id="cam-img-2"><div class="img-container-crop"><img src="gallery2.jpg" alt="G2" loading="lazy"></div></div>
-                <div class="board-card c-square tilt-s dynamic-photo" id="cam-img-3"><div class="img-container-crop"><img src="gallery3.jpg" alt="G3" loading="lazy"></div></div>
-                <div class="board-card c-oval tilt-m dynamic-photo" id="cam-img-4"><div class="img-container-crop"><img src="gallery4.jpg" alt="G4" loading="lazy"></div></div>
-                <div class="board-card c-heart tilt-l dynamic-photo" id="cam-img-5"><div class="img-container-crop"><img src="gallery5.jpg" alt="G5" loading="lazy"></div></div>
-                <div class="board-card c-square tilt-r dynamic-photo" id="cam-img-6"><div class="img-container-crop"><img src="gallery6.jpg" alt="G6" loading="lazy"></div></div>
-                <div class="board-card c-oval tilt-s dynamic-photo" id="cam-img-7"><div class="img-container-crop"><img src="gallery7.jpg" alt="G7" loading="lazy"></div></div>
-                <div class="board-card c-heart tilt-m dynamic-photo" id="cam-img-8"><div class="img-container-crop"><img src="gallery8.jpg" alt="G8" loading="lazy"></div></div>
-                <div class="board-card c-square tilt-l dynamic-photo" id="cam-img-9"><div class="img-container-crop"><img src="gallery9.jpg" alt="G9" loading="lazy"></div></div>
-                <div class="board-card c-oval tilt-r dynamic-photo" id="cam-img-10"><div class="img-container-crop"><img src="gallery10.jpg" alt="G10" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-l dynamic-photo" id="cam-img-1"><div class="img-container-crop"><img src="gallery1.JPG" alt="G1" loading="lazy"></div></div>
+                <div class="board-card c-heart tilt-r dynamic-photo" id="cam-img-2"><div class="img-container-crop"><img src="gallery2.JPG" alt="G2" loading="lazy"></div></div>
+                <div class="board-card c-square tilt-s dynamic-photo" id="cam-img-3"><div class="img-container-crop"><img src="gallery3.JPG" alt="G3" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-m dynamic-photo" id="cam-img-4"><div class="img-container-crop"><img src="gallery4.JPG" alt="G4" loading="lazy"></div></div>
+                <div class="board-card c-heart tilt-l dynamic-photo" id="cam-img-5"><div class="img-container-crop"><img src="gallery5.JPG" alt="G5" loading="lazy"></div></div>
+                <div class="board-card c-square tilt-r dynamic-photo" id="cam-img-6"><div class="img-container-crop"><img src="gallery6.JPG" alt="G6" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-s dynamic-photo" id="cam-img-7"><div class="img-container-crop"><img src="gallery7.JPG" alt="G7" loading="lazy"></div></div>
+                <div class="board-card c-heart tilt-m dynamic-photo" id="cam-img-8"><div class="img-container-crop"><img src="gallery8.JPG" alt="G8" loading="lazy"></div></div>
+                <div class="board-card c-square tilt-l dynamic-photo" id="cam-img-9"><div class="img-container-crop"><img src="gallery9.JPG" alt="G9" loading="lazy"></div></div>
+                <div class="board-card c-oval tilt-r dynamic-photo" id="cam-img-10"><div class="img-container-crop"><img src="gallery10.JPG" alt="G10" loading="lazy"></div></div>
             </div>
             
             <br>
@@ -500,7 +531,24 @@
             </div>
             
             <br>
-            <button onclick="returnToHub('final')" class="back-btn" style="margin-top: 30px; background-color: #fb6f92;">Return to Picnic 🧺</button>
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
+                <button onclick="returnToHub('final')" class="back-btn" style="margin-top: 0;">Return to Picnic 🧺</button>
+                <button onclick="openGamePage()" style="background-color: #ff007f; box-shadow: 0 4px 12px rgba(255, 0, 127, 0.3);">Play a game with me? 🎮</button>
+            </div>
+        </div>
+
+        <div id="page-game" class="content-card">
+            <h1>Memory Match Game 🧩</h1>
+            <p>Let's match up some of our favorite picnic items! Find all the matching pairs to win &lt;3</p>
+            
+            <div class="game-grid" id="memory-grid"></div>
+            
+            <h3 id="game-win-message" style="color: #ff007f; display: none; margin-top: 15px; font-size: 1.3rem;">🎉 You matched them all! You have an amazing memory, my beautiful Sammy!</h3>
+            
+            <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                <button onclick="resetGame()" style="background-color: #6c757d;">Restart Game 🔄</button>
+                <button onclick="exitGame()" class="back-btn" style="margin-top: 0;">Back to Message 📜</button>
+            </div>
         </div>
 
     </div>
@@ -645,6 +693,98 @@
                 heart.style.fontSize = Math.random() * 16 + 18 + "px";
                 container.appendChild(heart);
             }
+        }
+
+        /* 🎮 MEMORY MATCH GAME SCRIPTING */
+        const emojis = ["🧺", "🌷", "📻", "🧸", "💍", "💋"];
+        let gameCards = [...emojis, ...emojis];
+        let selectedCards = [];
+        let matchedCount = 0;
+        let isLockGrid = false;
+
+        function openGamePage() {
+            document.getElementById("page-final").style.display = "none";
+            document.getElementById("page-game").style.display = "block";
+            resetGame();
+        }
+
+        function exitGame() {
+            document.getElementById("page-game").style.display = "none";
+            document.getElementById("page-final").style.display = "block";
+        }
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function buildGameBoard() {
+            const grid = document.getElementById("memory-grid");
+            grid.innerHTML = "";
+            shuffle(gameCards);
+            
+            gameCards.forEach((emoji, index) => {
+                const card = document.createElement("div");
+                card.classList.add("game-card");
+                card.dataset.value = emoji;
+                card.dataset.id = index;
+                card.innerText = "❓";
+                card.addEventListener("click", onCardClicked);
+                grid.appendChild(card);
+            });
+        }
+
+        function onCardClicked() {
+            if (isLockGrid) return;
+            const card = this;
+            if (card.classList.contains("flipped") || card.classList.contains("matched")) return;
+
+            card.classList.add("flipped");
+            card.innerText = card.dataset.value;
+            selectedCards.push(card);
+
+            if (selectedCards.length === 2) {
+                isLockGrid = true;
+                checkForMatch();
+            }
+        }
+
+        function checkForMatch() {
+            const [cardOne, cardTwo] = selectedCards;
+            if (cardOne.dataset.value === cardTwo.dataset.value) {
+                cardOne.classList.add("matched");
+                cardTwo.classList.add("matched");
+                matchedCount += 2;
+                resetSelection();
+                
+                if (matchedCount === gameCards.length) {
+                    document.getElementById("game-win-message").style.display = "block";
+                }
+            } else {
+                setTimeout(() => {
+                    cardOne.classList.remove("flipped");
+                    cardTwo.classList.remove("flipped");
+                    cardOne.innerText = "❓";
+                    cardTwo.innerText = "❓";
+                    resetSelection();
+                }, 900);
+            }
+        }
+
+        function resetSelection() {
+            selectedCards = [];
+            isLockGrid = false;
+        }
+
+        function resetGame() {
+            matchedCount = 0;
+            selectedCards = [];
+            isLockGrid = false;
+            document.getElementById("game-win-message").style.display = "none";
+            buildGameBoard();
         }
     </script>
 </body>
