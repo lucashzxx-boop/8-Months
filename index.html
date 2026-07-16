@@ -170,7 +170,7 @@
             border: 3px solid white;
         }
 
-        /* 🌷 TULIPS STAGE - FIXED DESIGN WITH INLINE SVG BACKGROUND HEARTS */
+        /* 🌷 TULIPS STAGE */
         .locket-zone {
             display: grid;
             grid-template-columns: 1fr 240px 1fr;
@@ -230,7 +230,6 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
-        /* Fixed SVG Background Hearts - Solid, Visible, and Text fits beautifully */
         .bubble-heart {
             background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffccd5'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
             background-size: 100% 100%;
@@ -249,7 +248,7 @@
             filter: drop-shadow(0 8px 15px rgba(251, 111, 146, 0.25));
         }
 
-        /* ✉️ ENVELOPE STAGE WITH SEQUENTIAL FADE-IN */
+        /* ✉️ ENVELOPE STAGE */
         .scroll-container-wide {
             background-color: #fffdf5;
             border: 4px solid #8c5a3c;
@@ -285,43 +284,56 @@
             opacity: 0;
         }
 
-        /* 📷 CAMERA PHOTO BOARD WITH SEQUENTIAL FADE-IN */
+        /* 📷 REALISTIC AND SECURE CAMERA MEMORY BOARD */
         .photo-board {
             width: 100%;
-            background: #efe3ce;
-            border: 8px solid #8c5a3c;
+            background: #d4bda2;
+            border: 10px solid #5a3d28;
             border-radius: 16px;
-            padding: 30px 20px;
-            display: flex;
-            justify-content: space-around;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 20px;
+            justify-items: center;
             align-items: center;
-            gap: 15px;
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.15), 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.25), 0 12px 24px rgba(0,0,0,0.15);
         }
         .board-card {
             background: white;
-            padding: 10px 10px 25px 10px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+            padding: 10px 10px 22px 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             opacity: 0;
+            width: 100%;
+            max-width: 140px;
+            transition: transform 0.2s ease;
         }
-        .board-card img { width: 130px; height: 155px; object-fit: cover; display: block; }
+        .board-card:hover {
+            transform: scale(1.05) !important;
+            z-index: 5;
+        }
+        .board-card img { 
+            width: 100%; 
+            height: 140px; 
+            object-fit: cover; 
+            display: block; 
+        }
         
         .c-oval img   { border-radius: 50% / 40% 40% 60% 60%; }
         .c-heart img  { clip-path: url(#heart-mask-gallery); }
-        .c-square img { border-radius: 4px; }
+        .c-square img { border-radius: 2px; }
         
-        .tilt-l { transform: rotate(-5deg); }
-        .tilt-r { transform: rotate(6deg); }
+        .tilt-l { transform: rotate(-4deg); }
+        .tilt-r { transform: rotate(5deg); }
         .tilt-s { transform: rotate(-2deg); }
-        .tilt-m { transform: rotate(4deg); }
+        .tilt-m { transform: rotate(3deg); }
 
         .animate-pop-in {
             animation: photoReveal 0.6s ease-out forwards;
         }
 
         @keyframes photoReveal {
-            from { opacity: 0; transform: translateY(20px) scale(0.9); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+            from { opacity: 0; transform: translateY(15px) scale(0.95); }
+            to { opacity: 1; }
         }
 
         #gallery-svg-clip { width: 0; height: 0; position: absolute; }
@@ -351,17 +363,19 @@
             justify-content: center;
             gap: 20px;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
         }
         .side-final-img {
-            max-width: 200px;
+            max-width: 180px;
             height: auto;
             border: 8px solid white;
             box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             border-radius: 4px;
         }
         .final-img { 
-            max-width: 400px; 
+            max-width: 360px; 
+            width: 100%;
             border: 10px solid white; 
             box-shadow: 0 12px 28px rgba(0,0,0,0.25); 
             border-radius: 4px;
@@ -372,16 +386,25 @@
             border-radius: 30px;
             padding: 30px;
             position: relative;
-            max-width: 700px;
+            max-width: 750px;
             margin: 0 auto 35px auto;
             box-shadow: 6px 6px 0px #333;
+            min-height: 100px;
         }
         .bubble-frame::after {
             content: ''; position: absolute; bottom: -20px; left: 80px;
             border-width: 20px 20px 0; border-style: solid; border-color: #f8f9fa transparent;
             display: block; width: 0;
         }
-        .bubble-frame p { font-size: 1.4rem; font-weight: bold; color: #333; margin: 0; }
+        .bubble-frame p { 
+            font-size: 1.35rem; 
+            font-weight: bold; 
+            color: #333; 
+            margin: 0; 
+            text-align: left;
+            line-height: 1.6;
+            font-family: 'Segoe UI', sans-serif;
+        }
 
         .cartoon-heart {
             position: absolute;
@@ -548,7 +571,7 @@
 
         <div id="page-final" class="content-card" style="background: rgba(255, 255, 255, 0.9); z-index: 2;">
             <div class="bubble-frame">
-                <p>I hoped you like this present I made for you my love, to us having many many more years together until we grow old :)</p>
+                <p id="typewriter-final-msg"></p>
             </div>
             
             <div class="final-trio-row">
@@ -556,15 +579,22 @@
                 <img src="final.jpg" class="final-img" alt="Final Main Surprise">
                 <img src="finalright.jpg" class="side-final-img" alt="Right side memory">
             </div>
+            
+            <br>
+            <button onclick="returnToHub('final')" class="back-btn" style="margin-top: 30px; background-color: #fb6f92;">Return to Picnic 🧺</button>
         </div>
 
     </div>
 
     <script>
         const fullLetter = `Hi, my Sammy, I hope you like this lil surprise I made for you. First, I wanted to start off by saying I'm so glad we're able to make it to 8 MONTHSS while still being so in love with each other. Although we've had many miscommunications throughout our relationship, we continued to choose each other every day, and I'm so proud of us for that.\n\nMy beautiful baby, thank you for being such a big part of my life, and I couldn't ask for a better partner than you. You never fail to make me smile, and I always find joy when I'm talking to you. Thank you for making me feel loved and appreciated for everything I do for you, no matter how small it is. Every day I find myself falling deeper in love with the same girl I fell for 8 months ago, and I realise how lucky I am to be able to care for her for the rest of my life.\n\nI'm so freaking proud of how far we've come, and I can't wait for the rest of our days together. I know we're gonna have many more miscommunications in the future, but they're all gonna be worth it when I end up putting that ring on your finger :)\n\nTo many, many, many, many, many more monthsaries and anniversaries.\n\n~ Your Hubby`;
+        
+        const finalMessageText = `Hi my babyy, I hoped you liked this present I made for you, I can't wait to grow old with you and spend many many more years together. Your the best girlfriend I could ask for and I love you to infinity and back. Aku mencintaimu, sayangku <3`;
 
         let letterIndex = 0;
+        let finalMsgIndex = 0;
         let isTypingStarted = false;
+        let isFinalTypingStarted = false;
 
         const trackingList = { cassette: false, tulips: false, envelope: false, camera: false };
 
@@ -626,6 +656,14 @@
             }
         }
 
+        function typeFinalMessage() {
+            if (finalMsgIndex < finalMessageText.length) {
+                document.getElementById("typewriter-final-msg").textContent += finalMessageText.charAt(finalMsgIndex);
+                finalMsgIndex++;
+                setTimeout(typeFinalMessage, 20);
+            }
+        }
+
         function togglePhotographicLocket() {
             const hardwareImg = document.getElementById("locket-hardware-img");
             const photoBox = document.getElementById("locket-display-box");
@@ -644,6 +682,7 @@
             if (currentTabId === 'tulips') document.getElementById("page-tulips").style.display = "none";
             if (currentTabId === 'envelope') document.getElementById("page-envelope").style.display = "none";
             if (currentTabId === 'camera') document.getElementById("page-camera").style.display = "none";
+            if (currentTabId === 'final') document.getElementById("page-final").style.display = "none";
             
             document.getElementById("main-picnic").style.display = "block";
             verifyCompletionState();
@@ -659,10 +698,17 @@
         function goToFinalPage() {
             document.getElementById("main-picnic").style.display = "none";
             document.getElementById("page-final").style.display = "block";
+            if (!isFinalTypingStarted) {
+                isFinalTypingStarted = true;
+                typeFinalMessage();
+            }
             generateRandomHearts();
         }
 
         function generateRandomHearts() {
+            // Check if hearts are already built to prevent massive multi-click duplicates
+            if (document.querySelector(".cartoon-heart")) return;
+            
             const container = document.getElementById("main-container");
             const icons = ["❤️", "💖", "💝", "💕", "💗"];
             for (let i = 0; i < 20; i++) {
