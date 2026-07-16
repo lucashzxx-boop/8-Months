@@ -18,6 +18,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            overflow-x: hidden;
         }
         
         /* 🧺 MAIN ULTRA-REALISTIC PICNIC CONTAINER */
@@ -32,7 +34,6 @@
             align-items: center;
             padding: 40px 20px;
             
-            /* LINK TO YOUR ACTUAL PICNIC PHOTO BELOW */
             background-image: url('picnic_bg.jpg');
             background-size: cover;
             background-position: center;
@@ -40,11 +41,9 @@
             
             border-radius: 24px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
-            overflow: hidden;
         }
 
         /* 📋 GLASS-MORPHISM INTERFACE LAYER */
-        /* Keeps text perfectly readable while showing the realistic background underneath */
         .content-card {
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(15px);
@@ -56,7 +55,7 @@
             width: 100%;
             max-width: 950px;
             margin: 0 auto;
-            animation: fadeIn 0.4s ease-out;
+            animation: fadeIn 0.4s ease-out forwards;
         }
 
         @keyframes fadeIn {
@@ -113,7 +112,6 @@
             margin-top: 10px;
         }
 
-        /* Interactive photographic item overlays */
         .picnic-item {
             position: absolute;
             cursor: pointer;
@@ -121,12 +119,10 @@
             user-select: none;
         }
         
-        /* Realistic photo dimensions */
         .picnic-item img {
             width: 110px;
             height: auto;
             display: block;
-            /* Casts a heavy photographic top-down shadow onto the blanket image */
             filter: drop-shadow(12px 20px 10px rgba(0, 0, 0, 0.45));
         }
         
@@ -134,7 +130,6 @@
             transform: scale(1.15) rotate(4deg);
         }
         
-        /* Absolute position mapping over the flatlay background */
         #item-cassette { top: 22%; left: 18%; }
         #item-tulips   { top: 62%; left: 24%; }
         #item-envelope { top: 65%; right: 22%; }
@@ -175,12 +170,35 @@
             border: 3px solid white;
         }
 
-        /* 🌷 TULIPS STAGE */
+        /* 🌷 TULIPS STAGE SURROUND LAYOUT */
         .locket-zone {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            justify-items: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .locket-center-col {
+            grid-column: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 100%;
+        }
+        .hearts-left-col {
+            grid-column: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-end;
+        }
+        .hearts-right-col {
+            grid-column: 3;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: flex-start;
         }
         .locket-interactive {
             font-size: 85px;
@@ -191,24 +209,17 @@
         }
         .locket-photos {
             display: none;
-            gap: 25px;
+            gap: 15px;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
         }
         .locket-img {
-            width: 170px; height: 230px;
+            width: 140px; height: 190px;
             object-fit: cover;
             border: 6px solid #fcfcfc;
             border-radius: 50% 50% 40% 40% / 40% 40% 50% 50%;
-            filter: grayscale(100%);
+            filter: none; /* Full color */
             box-shadow: 0 12px 24px rgba(0,0,0,0.25);
-        }
-        .hearts-circle {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 12px;
-            max-width: 850px;
         }
         .bubble-heart {
             background: #fff5f6;
@@ -219,9 +230,11 @@
             color: #ff4d6d;
             font-size: 0.95rem;
             box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+            max-width: 260px;
+            text-align: center;
         }
 
-        /* ✉️ ENVELOPE STAGE */
+        /* ✉️ ENVELOPE STAGE WITH SEQUENTIAL FADE-IN */
         .scroll-container-wide {
             background-color: #fffdf5;
             border: 4px solid #8c5a3c;
@@ -254,9 +267,10 @@
         }
         .letter-booth-img {
             width: 180px; height: 230px; object-fit: cover; border: 8px solid white; box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+            opacity: 0;
         }
 
-        /* 📷 CAMERA PHOTO BOARD */
+        /* 📷 CAMERA PHOTO BOARD WITH SEQUENTIAL FADE-IN */
         .photo-board {
             width: 100%;
             background: #efe3ce;
@@ -273,6 +287,7 @@
             background: white;
             padding: 10px 10px 25px 10px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+            opacity: 0;
         }
         .board-card img { width: 130px; height: 155px; object-fit: cover; display: block; }
         
@@ -284,6 +299,16 @@
         .tilt-r { transform: rotate(6deg); }
         .tilt-s { transform: rotate(-2deg); }
         .tilt-m { transform: rotate(4deg); }
+
+        /* Animation classes toggled by JS */
+        .animate-pop-in {
+            animation: photoReveal 0.6s ease-out forwards;
+        }
+
+        @keyframes photoReveal {
+            from { opacity: 0; transform: translateY(20px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
 
         #gallery-svg-clip { width: 0; height: 0; position: absolute; }
 
@@ -305,7 +330,28 @@
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* FINAL PAGE */
+        /* 🐾 FINAL PAGE STYLING WITH SIDE PICTURES */
+        .final-trio-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .side-final-img {
+            max-width: 200px;
+            height: auto;
+            border: 8px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-radius: 4px;
+        }
+        .final-img { 
+            max-width: 400px; 
+            border: 10px solid white; 
+            box-shadow: 0 12px 28px rgba(0,0,0,0.25); 
+            border-radius: 4px;
+        }
         .bubble-frame {
             background: #f8f9fa;
             border: 3px solid #333;
@@ -322,7 +368,21 @@
             display: block; width: 0;
         }
         .bubble-frame p { font-size: 1.4rem; font-weight: bold; color: #333; margin: 0; }
-        .final-img { max-width: 450px; border: 10px solid white; box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+
+        /* Floating Cartoon Hearts Background Decor */
+        .cartoon-heart {
+            position: absolute;
+            font-size: 24px;
+            color: #ff4d6d;
+            opacity: 0.7;
+            pointer-events: none;
+            user-select: none;
+            animation: floatUpDown 3s ease-in-out infinite alternate;
+        }
+        @keyframes floatUpDown {
+            from { transform: translateY(0) scale(1); }
+            to { transform: translateY(-15px) scale(1.15); }
+        }
     </style>
 </head>
 <body>
@@ -335,7 +395,7 @@
         </defs>
     </svg>
 
-    <div class="container">
+    <div class="container" id="main-container">
         
         <div id="login-screen" class="content-card">
             <h1>🔒 Restricted Access</h1>
@@ -354,7 +414,7 @@
             <h1>Happy Monthsary, Beautiful! 🎉</h1>
             <p>You got the password &lt;3 ! Every single day with you is a blessing, no matter how many miles are between us. Thank you for being the best girlfriend ever.</p>
             
-            <img src="us.jpeg" alt="A cute picture of us" style="max-width: 380px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
+            <img src="us.jpg" alt="A cute picture of us" style="max-width: 380px; margin-bottom: 20px; border-radius: 15px; box-shadow: 0 10px 20px rgba(0,0,0,0.2);">
             
             <div>
                 <button onclick="goToPicnicHub()" class="heart-btn" style="background: none; border: none; font-size: 60px; cursor: pointer; animation: pulse 1.2s infinite ease-in-out;">❤️</button>
@@ -414,20 +474,24 @@
             <p>Click the closed locket below to reveal our special pictures inside.</p>
             
             <div class="locket-zone">
-                <div id="locket-icon" class="locket-interactive" onclick="revealLocket()">🔒💝</div>
-                
-                <div id="locket-display-box" class="locket-photos">
-                    <img src="locket1.jpg" class="locket-img" alt="Locket left inside">
-                    <img src="locket2.jpg" class="locket-img" alt="Locket right inside">
-                </div>
-
-                <div class="hearts-circle">
+                <div class="hearts-left-col">
                     <div class="bubble-heart">💖 Your smile that lights up the whole room</div>
                     <div class="bubble-heart">💖 Your voice that is so sweet</div>
                     <div class="bubble-heart">💖 Your beautiful face that absolutely no one can compare to</div>
+                </div>
+
+                <div class="locket-center-col">
+                    <div id="locket-icon" class="locket-interactive" onclick="revealLocket()">🔒💝</div>
+                    <div id="locket-display-box" class="locket-photos">
+                        <img src="locket1.jpg" class="locket-img" alt="Locket left inside">
+                        <img src="locket2.jpg" class="locket-img" alt="Locket right inside">
+                    </div>
+                </div>
+
+                <div class="hearts-right-col">
                     <div class="bubble-heart">💖 Your deep love and care for me</div>
                     <div class="bubble-heart">💖 Your heart that always has compassion for everyone</div>
-                    <div class="bubble-heart">💖 Your personality that I will never get bored off</div>
+                    <div class="bubble-heart">💖 Your personality that I will never get bored of</div>
                 </div>
             </div>
             <br>
@@ -442,9 +506,9 @@
             </div>
 
             <div class="letter-booth-row">
-                <img src="letter1.jpg" class="letter-booth-img" alt="Letter Strip 1">
-                <img src="letter2.jpg" class="letter-booth-img" alt="Letter Strip 2">
-                <img src="letter3.jpg" class="letter-booth-img" alt="Letter Strip 3">
+                <img src="letter1.jpg" id="let-img-1" class="letter-booth-img" alt="Letter Strip 1">
+                <img src="letter2.jpg" id="let-img-2" class="letter-booth-img" alt="Letter Strip 2">
+                <img src="letter3.jpg" id="let-img-3" class="letter-booth-img" alt="Letter Strip 3">
             </div>
 
             <br>
@@ -456,23 +520,28 @@
             <p>Every single frame tells part of our beautiful 8-month story.</p>
             
             <div class="photo-board">
-                <div class="board-card c-oval tilt-l"><img src="gallery1.jpeg" alt="G1"></div>
-                <div class="board-card c-heart tilt-r"><img src="gallery2.jpeg" alt="G2"></div>
-                <div class="board-card c-square tilt-s"><img src="gallery3.jpeg" alt="G3"></div>
-                <div class="board-card c-oval tilt-m"><img src="gallery4.jpeg" alt="G4"></div>
-                <div class="board-card c-heart tilt-l"><img src="gallery5.jpeg" alt="G5"></div>
-                <div class="board-card c-square tilt-r"><img src="gallery6.jpg" alt="G6"></div>
+                <div class="board-card c-oval tilt-l dynamic-photo" id="cam-img-1"><img src="gallery1.jpeg" alt="G1"></div>
+                <div class="board-card c-heart tilt-r dynamic-photo" id="cam-img-2"><img src="gallery2.jpeg" alt="G2"></div>
+                <div class="board-card c-square tilt-s dynamic-photo" id="cam-img-3"><img src="gallery3.jpeg" alt="G3"></div>
+                <div class="board-card c-oval tilt-m dynamic-photo" id="cam-img-4"><img src="gallery4.jpeg" alt="G4"></div>
+                <div class="board-card c-heart tilt-l dynamic-photo" id="cam-img-5"><img src="gallery5.jpeg" alt="G5"></div>
+                <div class="board-card c-square tilt-r dynamic-photo" id="cam-img-6"><img src="gallery6.jpg" alt="G6"></div>
             </div>
             
             <br>
             <button onclick="returnToHub('camera')" class="back-btn" style="margin-top: 30px;">Return to Picnic 🧺</button>
         </div>
 
-        <div id="page-final" class="content-card" style="background: rgba(255, 255, 255, 0.9);">
+        <div id="page-final" class="content-card" style="background: rgba(255, 255, 255, 0.9); z-index: 2;">
             <div class="bubble-frame">
                 <p>I hoped you like this present I made for you my love, to us having many many more years together until we grow old :)</p>
             </div>
-            <img src="final.jpg" class="final-img" alt="Final Memory Surprise">
+            
+            <div class="final-trio-row">
+                <img src="finalleft.jpg" class="side-final-img" alt="Left side memory">
+                <img src="final.jpg" class="final-img" alt="Final Main Surprise">
+                <img src="finalright.jpg" class="side-final-img" alt="Right side memory">
+            </div>
         </div>
 
     </div>
@@ -507,13 +576,30 @@
             
             if (type === 'cassette') document.getElementById("page-cassette").style.display = "block";
             if (type === 'tulips') document.getElementById("page-tulips").style.display = "block";
-            if (type === 'camera') document.getElementById("page-camera").style.display = "block";
+            
+            if (type === 'camera') {
+                document.getElementById("page-camera").style.display = "block";
+                // Trigger sequential camera board fade-ins
+                for (let i = 1; i <= 6; i++) {
+                    setTimeout(() => {
+                        const el = document.getElementById(`cam-img-${i}`);
+                        if(el) el.classList.add('animate-pop-in');
+                    }, (i - 1) * 350); 
+                }
+            }
             
             if (type === 'envelope') {
                 document.getElementById("page-envelope").style.display = "block";
                 if (!isTypingStarted) {
                     isTypingStarted = true;
                     typeLetter();
+                }
+                // Trigger sequential envelope strip fade-ins
+                for (let i = 1; i <= 3; i++) {
+                    setTimeout(() => {
+                        const el = document.getElementById(`let-img-${i}`);
+                        if(el) el.classList.add('animate-pop-in');
+                    }, (i - 1) * 400);
                 }
             }
             
@@ -553,6 +639,23 @@
         function goToFinalPage() {
             document.getElementById("main-picnic").style.display = "none";
             document.getElementById("page-final").style.display = "block";
+            generateRandomHearts();
+        }
+
+        // Creates decorative floating cartoon hearts on the final stage
+        function generateRandomHearts() {
+            const container = document.getElementById("main-container");
+            const icons = ["❤️", "💖", "💝", "💕", "💗"];
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement("div");
+                heart.className = "cartoon-heart";
+                heart.innerText = icons[Math.floor(Math.random() * icons.length)];
+                heart.style.left = Math.random() * 90 + 5 + "%";
+                heart.style.top = Math.random() * 80 + 10 + "%";
+                heart.style.animationDelay = Math.random() * 2 + "s";
+                heart.style.fontSize = Math.random() * 16 + 18 + "px";
+                container.appendChild(heart);
+            }
         }
     </script>
 
