@@ -170,40 +170,40 @@
             border: 3px solid white;
         }
 
-        /* 🌷 TULIPS STAGE - ACTUAL SHAPED HEARTS WITH INTERNAL TYPOGRAPHY */
+        /* 🌷 TULIPS STAGE - FIXED DESIGN WITH INLINE SVG BACKGROUND HEARTS */
         .locket-zone {
             display: grid;
-            grid-template-columns: 1fr 340px 1fr;
+            grid-template-columns: 1fr 240px 1fr;
             align-items: center;
             justify-items: center;
-            gap: 15px;
+            gap: 20px;
             width: 100%;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         .locket-center-col {
             grid-column: 2;
             display: flex;
             flex-direction: column;
             align-items: center;
-            position: relative;
             width: 100%;
         }
         .hearts-left-col {
             grid-column: 1;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 15px;
             align-items: flex-end;
+            width: 100%;
         }
         .hearts-right-col {
             grid-column: 3;
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 15px;
             align-items: flex-start;
+            width: 100%;
         }
         
-        /* Interactive Photographic Locket Structure */
         .locket-hardware {
             width: 180px;
             height: auto;
@@ -215,42 +215,38 @@
             transform: scale(1.05);
         }
         
-        /* Photos reveal box styled directly behind / under the opening shell */
         .locket-photos {
             display: none;
-            gap: 15px;
+            gap: 12px;
             justify-content: center;
             margin-top: 20px;
             animation: fadeIn 0.5s ease-out forwards;
         }
         .locket-img {
-            width: 125px; height: 170px;
+            width: 105px; height: 145px;
             object-fit: cover;
-            border: 5px solid #fcfcfc;
+            border: 4px solid #fcfcfc;
             border-radius: 50% 50% 45% 45% / 45% 45% 50% 50%;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
         }
 
-        /* True Vector Shape Hearts for Text Elements */
+        /* Fixed SVG Background Hearts - Solid, Visible, and Text fits beautifully */
         .bubble-heart {
-            background-color: #ffccd5;
-            width: 220px;
-            height: 200px;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ffccd5'><path d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'/></svg>");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            width: 250px;
+            height: 220px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 30px 25px 45px 25px;
+            padding: 30px 30px 60px 30px;
             font-weight: 600;
             color: #d64566;
-            font-size: 0.88rem;
+            font-size: 0.92rem;
             line-height: 1.4;
-            box-shadow: 0 8px 15px rgba(251, 111, 146, 0.2);
-            
-            /* Shapes the div wrapper directly into a smooth love heart geometry */
-            clip-path: path("M12 4.419C12.448 3.845 17.371-1.645 22.044 1.25c4.773 2.956 3.1 9.357-1.125 13.483L12 24 3.081 14.733C-1.144 10.607-2.817 4.206 1.956 1.25 6.629-1.645 11.552 3.845 12 4.419z");
-            transform: scale(8.5); /* Scale coordinate baseline maps to fill dimension area */
-            transform-origin: center;
+            filter: drop-shadow(0 8px 15px rgba(251, 111, 146, 0.25));
         }
 
         /* ✉️ ENVELOPE STAGE WITH SEQUENTIAL FADE-IN */
@@ -492,9 +488,9 @@
             
             <div class="locket-zone">
                 <div class="hearts-left-col">
-                    <div class="bubble-heart"><span>Your smile that lights up the whole room</span></div>
-                    <div class="bubble-heart"><span>Your voice that is so sweet</span></div>
-                    <div class="bubble-heart"><span>Your beautiful face that absolutely no one can compare to</span></div>
+                    <div class="bubble-heart">Your smile that lights up the whole room</div>
+                    <div class="bubble-heart">Your voice that is so sweet</div>
+                    <div class="bubble-heart">Your beautiful face that absolutely no one can compare to</div>
                 </div>
 
                 <div class="locket-center-col">
@@ -507,9 +503,9 @@
                 </div>
 
                 <div class="hearts-right-col">
-                    <div class="bubble-heart"><span>Your deep love and care for me</span></div>
-                    <div class="bubble-heart"><span>Your heart that always has compassion for everyone</span></div>
-                    <div class="bubble-heart"><span>Your personality that I will never get bored of</span></div>
+                    <div class="bubble-heart">Your deep love and care for me</div>
+                    <div class="bubble-heart">Your heart that always has compassion for everyone</div>
+                    <div class="bubble-heart">Your personality that I will never get bored of</div>
                 </div>
             </div>
             <br>
@@ -630,7 +626,6 @@
             }
         }
 
-        // Toggles between the closed state asset and the open state asset
         function togglePhotographicLocket() {
             const hardwareImg = document.getElementById("locket-hardware-img");
             const photoBox = document.getElementById("locket-display-box");
